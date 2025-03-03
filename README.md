@@ -13,7 +13,7 @@ del corso "Programmazione" del primo anno della laurea triennale in Informatica 
 - Livelli e rispettiva gestione.
 - Menù secondario.
 
-# Andrei
+## Andrei
 - Gestione griglia visiva.
 - Salvataggio file.
 - Classifica dei punteggi.
