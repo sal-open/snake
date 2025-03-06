@@ -14,4 +14,11 @@ int main()
 {
     Levels livello(10);
     livello.stampaLivelli();
+    cout << "Livello current: " << livello.getCurrentIndex() << endl;
+
+    livello.completaLivello(livello.getCurrentIndex());
+    
+    cout << "Livello current: " << livello.getCurrentIndex() << endl;
+    
+    
 }
