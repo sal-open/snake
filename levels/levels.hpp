@@ -53,7 +53,7 @@ public:
         head = generaLivello(100, 1.0, 1.0, 1);
         livelli tmp = head;
 
-        for (int i = 1; i < numeroLivelli; ++i)
+        for (int i = 1; i < numeroLivelli; i++)
         {
             livelli nuovoLivello = generaLivello(tmp->bonus + 50, tmp->moltiplicatore + 0.1, tmp->velocitaSerpente + 0.1, tmp->idLivello + 1);
             tmp->next = nuovoLivello;
@@ -99,7 +99,7 @@ public:
     {
         if (num < 0)
             return;
-        for (livelli tmp = head; tmp = tmp->next; tmp != nullptr)
+        for (livelli tmp = head; tmp != nullptr; tmp = tmp->next)
         {
             if (tmp->idLivello == num)
             {
@@ -110,7 +110,7 @@ public:
     }
     // Completando il livello viene chiamata la funzione che restituisce i punti da dare al giocatore e segna il livello come completato
     // Inoltre, aggiorna il puntatore current al successivo non completato
-    int completaLivello(int index)
+    void completaLivello(int index)
     {
         current->completato = true;
         // In modo che se sono al livello 2, e il livello 3 l'ho già completato, vado al 4
