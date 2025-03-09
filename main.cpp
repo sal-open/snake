@@ -10,6 +10,7 @@
 #include "levels/levels.hpp"
 using namespace std;
 #include <ncurses.h>
+#include "menu.h"
 
 // Larghezza e altezza della finestra
 static int WIDTH;
@@ -30,11 +31,23 @@ int main()
     WINDOW *win = newwin(yMax - 10, xMax - 10, 5, 5);
     // Inserisce un bordo
     box(win, 0, 0);
+    char newGame[] = "New game";
+    char ranking[] = "Ranking";
+    char ranking2[] = "Classifica";
+    Menu menus[3] = {
+        Menu(newGame, 'n'),
+        Menu(ranking, 'r'),
+        Menu(ranking2, 'c')};
 
-    mvwprintw(win, 0, 2, "Snake");
+    MenuBar menuBar = MenuBar(win, menus, 3);
+    menuBar.draw();
 
-    
-    
+    char ch;
+    while ((ch = wgetch(win)))
+    {
+        menuBar.handleTrigger(ch);
+        menuBar.draw();
+    }
 
     endwin();
 
