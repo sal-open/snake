@@ -32,6 +32,7 @@ public:
         generaLivelli(numLivelli);
         current = head;
     }
+
     livelli generaLivello(int bonus, double molt, double vel, int id)
     {
         livelli newLevel = new Livello();
@@ -39,6 +40,7 @@ public:
         newLevel->bonus = bonus;
         newLevel->moltiplicatore = molt;
         newLevel->velocitaSerpente = vel;
+        // TODO: da riguardare
         newLevel->numeroMeleDaMangiare = (newLevel->bonus / 10) * newLevel->moltiplicatore;
         newLevel->tempoADisposizione = newLevel->bonus / newLevel->moltiplicatore;
         newLevel->prev = nullptr;

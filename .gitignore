@@ -1,6 +1,2 @@
 .vscode
-a.out
-main
-*.o
-*.exe
-.DS_Store
+output
