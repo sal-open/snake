@@ -6,14 +6,13 @@ Questa repository contiene il codice sorgente di _Snake_, un progetto sviluppato
 
 ### Salvatore
 - Implementazione del motore fisico 2D.
-- Creazione del menù iniziale.
+- Gestione della griglia visiva.
 
 ### Pietro
 - Sviluppo e gestione dei livelli.
-- Implementazione del menù secondario.
+- Implementazione del menù principale e secondario.
 
 ### Andrei
-- Gestione della griglia visiva.
 - Salvataggio dei dati di gioco.
 - Creazione della classifica dei punteggi.
 
@@ -26,13 +25,12 @@ for the _Programmazione_ course in the Bachelor's Degree in Computer Science at 
 
 ### Salvatore
 - 2D physics engine implementation.
-- Main menu creation.
+- Visual grid management.
 
 ### Pietro
 - Level development and management.
-- Secondary menu implementation.
+- Main menu and in-game menu implementation.  
 
 ### Andrei
-- Visual grid management.
 - Game data saving.
 - Scoreboard creation.
