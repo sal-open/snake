@@ -12,13 +12,9 @@
 
 #include <iostream>
 #include <ncurses.h>
+#include "../utilities.hpp"
 
-struct pair {
-    int x;
-    int y;
-};
-
-class Screen {
+class Snake {
     private:
         pair screen;
         pair snake_pos;
@@ -29,11 +25,13 @@ class Screen {
 
 
     public:
-        Screen();
+        Snake();
 
-        void screen_size();
+        void screen_Size();
 
-        void snake_gen();
+        void snake_Gen();
+
+        void snake_Checks();
 };
 
 #endif //ENGINE_H
