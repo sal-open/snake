@@ -4,7 +4,7 @@
 * Course: Programmazione (00819).
 * Author: Salvatore Bruzzese.
 * 
-* Description: File di libreria per graphics.hpp.
+* Description: Header files for graphics.hpp.
 */
 
 #ifndef GRAPHICS_H
@@ -15,15 +15,16 @@
 #include "../utilities.hpp"
 
 class Screen {
-    private:
+    public:
         pair screen;
 
         WINDOW *win;
 
-    public:
         void gen_Screen();
 
         void end_Screen();
+
+        void draw_Snake(pair snake_pos);
 };
 
 #endif //GRAPHICS_H

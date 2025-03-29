@@ -4,34 +4,26 @@
 * Course: Programmazione (00819).
 * Author: Salvatore Bruzzese.
 * 
-* Description: File di libreria per engine.cpp
+* Description: Header files for engine.cpp
 */
 
 #ifndef ENGINE_H
 #define ENGINE_H
 
 #include <iostream>
+#include <ctime>
 #include <ncurses.h>
 #include "../utilities.hpp"
 
 class Snake {
-    private:
-        pair screen;
-        pair snake_pos;
-
-        WINDOW *win;
-
-        bool snake_presence = false;
-
-
     public:
-        Snake();
+        pair pos;
 
-        void screen_Size();
+        bool presence = false;
 
-        void snake_Gen();
+        void gen(pair screen);
 
-        void snake_Checks();
+        void checks(pair screen);
 };
 
 #endif //ENGINE_H

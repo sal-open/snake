@@ -4,7 +4,7 @@
 * Course: Programmazione (00819).
 * Author: Salvatore Bruzzese.
 * 
-* Description: Codice sorgente per la gestione della griglia visiva.
+* Description: Source code for the game's visual grid management.
 */
 
 #include "graphics.hpp"
@@ -24,4 +24,9 @@ void Screen::gen_Screen() {
 
 void Screen::end_Screen() {
     endwin();
+}
+
+void Screen::draw_Snake(pair snake_pos) {
+    mvwaddch(win, snake_pos.y, snake_pos.x, '@');
+    wrefresh(win);
 }
