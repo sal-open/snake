@@ -1,59 +1,76 @@
-/*
- * Bachelor's degree in Computer Science.
- *
- * Course: Programmazione (00819).
- * Author: Andrei Pirva, Pietro Tombaccini e Salvatore Bruzzese.
- *
- * Description: Entry point for the compiler.
- */
 #include <iostream>
-#include "levels/levels.hpp"
-using namespace std;
 #include <ncurses.h>
-#include "menu.h"
-#include "apple.h"
+#include "levels/menu.h"
+#include "levels/levels.hpp"
 
-// Larghezza e altezza della finestra
-static int WIDTH;
-static int HEIGHT;
-static int score;
-static bool gameOver = false;
+using namespace std;
 
 int main()
 {
-
     initscr();
-    noecho();
-    // Il cursore non si vede
-    curs_set(0);
+    noecho();    // impedisce di vedere i caratteri che vengono digitati
+    cbreak();    // disabilita buffering dei caratteri
+    curs_set(0); // disabilita il cursore
+
+    start_color();                          // abilita i colori
+    init_pair(1, COLOR_GREEN, COLOR_BLACK); // colore verde per il testo
+
     int yMax, xMax;
-    // Prendiamo la grandezza della finestra del terminale e la salviamo nelle due variabili
-    getmaxyx(stdscr, yMax, xMax);
-    WINDOW *win = newwin(yMax - 10, xMax - 10, 5, 5);
-    // Inserisce un bordo
-    box(win, 0, 0);
-    char newGame[] = "New game";
-    char ranking[] = "Ranking";
-    char prova[] = "Andrei";
-    Menu menus[3] = {
+    getmaxyx(stdscr, yMax, xMax); // ottiene le dimensioni della finestra
+
+    WINDOW *menuWin = newwin(15, 40, (yMax - 15) / 2, (xMax - 40) / 2); // crea una finestra per il menu
+    keypad(menuWin, true);                                              // abilita i tasti freccia nella finestra
+
+    // Stringhe per il menu
+    char newGame[] = "Nuova partita";
+    char ranking[] = "Punteggi";
+    char exitGame[] = "Esci";
+
+    // Inizializza il Menu
+    Menu menuItems[3] = {
         Menu(newGame, 'n'),
         Menu(ranking, 'r'),
-        Menu(prova, 'a'),
+        Menu(exitGame, 'e'),
     };
 
-    MenuBar menuBar = MenuBar(win, menus, 3);
-    menuBar.draw();
+    // Chiama la classe MenuBar e la funzione per disegnare il menu
+    MenuBar menuBar(menuWin, menuItems, 3);
+    menuBar.draw("SNAKE TERMINAL");
 
-    char ch;
-    Apple a = Apple(0, 0, win);
-    while ((ch = wgetch(win)))
+    // Attesa dell'input dell'utente
+    int ch;
+    while ((ch = wgetch(menuWin)))
     {
-        a.generateNextLocation(yMax - 10, xMax - 10);
-        menuBar.handleTrigger(ch);
-        menuBar.draw();
+        switch (ch)
+        {
+        case KEY_UP:
+            menuBar.spostaSu();
+            break;
+        case KEY_DOWN:
+            menuBar.spostaGiu();
+            break;
+        case 10:
+        {
+            int scelta = menuBar.getScelta();
+            endwin(); // termina ncurses
+            switch (scelta)
+            {
+            case 0:
+                printf("Avvio nuova partita...\n");
+                break;
+            case 1:
+                printf("Visualizzazione punteggi...\n");
+                break;
+            case 2:
+                printf("Uscita dal gioco.\n");
+                return 0;
+            }
+            return 0;
+        }
+        }
+        menuBar.draw("SNAKE TERMINAL");
     }
-    endwin();
 
-    // Livelli generati
-    Levels livello(10);
+    endwin();
+    return 0;
 }
