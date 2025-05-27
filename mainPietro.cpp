@@ -2,6 +2,7 @@
 #include <ncurses.h>
 #include "levels/menu.h"
 #include "levels/levels.hpp"
+#include "punteggi/data.hpp"
 
 using namespace std;
 
@@ -35,7 +36,7 @@ int main()
 
     // Chiama la classe MenuBar e la funzione per disegnare il menu
     MenuBar menuBar(menuWin, menuItems, 3);
-    menuBar.draw("SNAKE TERMINAL");
+    menuBar.draw("SN@KE");
 
     // Attesa dell'input dell'utente
     int ch;
@@ -52,23 +53,35 @@ int main()
         case 10:
         {
             int scelta = menuBar.getScelta();
-            endwin(); // termina ncurses
+
             switch (scelta)
             {
             case 0:
+                endwin();
                 printf("Avvio nuova partita...\n");
                 break;
             case 1:
-                printf("Visualizzazione punteggi...\n");
+            {
+                Data d;
+                d.mostraPunteggi(); // mantiene ncurses attivo
+                // Ricrea finestra menu
+                clear();
+                refresh();
+                menuWin = newwin(15, 40, (yMax - 15) / 2, (xMax - 40) / 2);
+                keypad(menuWin, true);
+                menuBar = MenuBar(menuWin, menuItems, 3);
+                menuBar.draw("SN@KE");
                 break;
+            }
             case 2:
+                endwin(); // chiude solo quando esci dal gioco
                 printf("Uscita dal gioco.\n");
                 return 0;
             }
-            return 0;
+            break;
         }
         }
-        menuBar.draw("SNAKE TERMINAL");
+        menuBar.draw("SN@KE");
     }
 
     endwin();

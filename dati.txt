@@ -1,0 +1,12 @@
+ID:1748339911
+Nickname:Giovanni
+Punteggio:5656
+ID:1748339911
+Nickname:Maria
+Punteggio:2003
+ID:1748339911
+Nickname:Anna
+Punteggio:495
+ID:1748339911
+Nickname:Luca
+Punteggio:12
