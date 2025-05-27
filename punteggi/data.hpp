@@ -32,11 +32,9 @@ public:
     }
     void Save()
     {
-        // First check if this is the first call to Save() in this program run
         static bool first_save = true;
         if (first_save)
         {
-            // If it's the first call, open and truncate the file to clear previous contents
             std::ofstream clear_file("dati.txt", std::ios::trunc);
             clear_file.close();
             first_save = false;

@@ -1,6 +1,7 @@
 #include "graphics/graphics.hpp"
 #include "physics/snake.hpp"
 
+
 int main() {
     Screen terminal;
     
