@@ -1,10 +1,10 @@
 /*
-* Bachelor's degree in Computer Science.
+* Laurea Triennale in Informatica - Alma Mater Studiorum.
 * 
-* Course: Programmazione (00819).
-* Author: Salvatore Bruzzese.
+* Corso: Programmazione (00819).
+* Studente: Salvatore Bruzzese.
 * 
-* Description: Header files for graphics.hpp.
+* Descrizione: .
 */
 
 #ifndef GRAPHICS_H
@@ -12,30 +12,27 @@
 
 #include <iostream>
 #include <ncurses.h>
-#include "../physics/snake.hpp"
+#include "menu.hpp"
+#include "../snake/snake.hpp"
 #include "../utilities.hpp"
 
-class Screen {
-    private:
-        pair screen;
-        pair offset;
-        pair window;
+class Screen
+{
+private:
+    pair window;
 
-        WINDOW *win;
+    WINDOW *win;
 
-    public:
-    
-        Snake snake;
+public:
+    Snake snake;
+    Menu menu();
 
-        pair get_Gameboard();
-
-        WINDOW* get_Window();
-
-        void init();
-
-        void gameboard();
-
-        void end(int code);
+    Screen();
+    pair get_Gameboard();
+    WINDOW* get_Window();
+    void init();
+    void gameboard();
+    void end(int code);
 };
 
 #endif //GRAPHICS_H

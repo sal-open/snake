@@ -1,23 +1,30 @@
 /*
-* Bachelor's degree in Computer Science.
+* Laurea Triennale in Informatica - Alma Mater Studiorum.
 * 
-* Course: Programmazione (00819).
-* Author: Salvatore Bruzzese.
+* Corso: Programmazione (00819).
+* Studente: Salvatore Bruzzese.
 * 
-* Description: Source code for the game's visual grid management.
+* Descrizione: .
 */
 
 #include "graphics.hpp"
 
-void Screen::init() {
+Screen::Screen() {}
+
+void Screen::init()
+{
     initscr();
-    noecho();
     curs_set(0);
+    noecho();
+    cbreak();
     keypad(stdscr, TRUE);
+    start_color();
+    use_default_colors();
     refresh();
 }
 
-void Screen::gameboard() {
+void Screen::gameboard()
+{
     getmaxyx(stdscr, screen.y, screen.x);
     
     offset.y = screen.y/2 - HEIGHT/2;
@@ -28,21 +35,22 @@ void Screen::gameboard() {
 
     win = newwin(HEIGHT, WIDTH, offset.y, offset.x);
 
-    nodelay(win, true);
-
     box(win, 0, 0);
     wrefresh(win);
 }
 
-void Screen::end(int code) {
+void Screen::end(int code)
+{
     endwin();
     exit(code);
 }
 
-pair Screen::get_Gameboard() {
+pair Screen::get_Gameboard()
+{
     return window;
 }
 
-WINDOW* Screen::get_Window() {
+WINDOW* Screen::get_Window()
+{
     return win;
 }

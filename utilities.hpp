@@ -1,12 +1,15 @@
 #ifndef UITILITIES_H
 #define UITILITIES_H
 
+#define HEIGHT 20
+#define WIDTH 70
+
 struct pair {
     int x;
     int y;
 };
 
-#define HEIGHT 20
-#define WIDTH 70
+static pair screen;
+static pair offset;
 
 #endif

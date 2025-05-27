@@ -1,4 +1,4 @@
-# Snake - IT
+# Snake
 
 Questa repository contiene il codice sorgente di _Snake_, un progetto sviluppato per l'esame _Programmazione_ del corso di laurea triennale in Informatica all'Università di Bologna.
 
@@ -9,28 +9,9 @@ Questa repository contiene il codice sorgente di _Snake_, un progetto sviluppato
 - Gestione della griglia visiva.
 
 ### Pietro
-- Sviluppo e gestione dei livelli.
-- Implementazione del menù principale e secondario.
+- Gestione dei livelli.
+- Implementazione del menù.
 
 ### Andrei
 - Salvataggio dei dati di gioco.
 - Creazione della classifica dei punteggi.
-
-# Snake - EN 
-
-This repository contains the source code for the _Snake_ game, developed as a project
-for the _Programmazione_ course in the Bachelor's Degree in Computer Science at the University of Bologna.
-
-## Work Distribution
-
-### Salvatore
-- 2D physics engine implementation.
-- Visual grid management.
-
-### Pietro
-- Level development and management.
-- Main menu and in-game menu implementation.  
-
-### Andrei
-- Game data saving.
-- Scoreboard creation.
