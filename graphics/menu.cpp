@@ -1,5 +1,4 @@
 #include "menu.hpp"
-#include <cstring>
 
 const char* Menu::items[]    = { "Nuova partita", "Punteggi", "Esci" };
 const char  Menu::triggers[] = { 'n', 'p', 'e' };

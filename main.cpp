@@ -1,4 +1,4 @@
-#include "graphics/graphics.hpp"
+#include "graphics/screen.hpp"
 #include "graphics/menu.hpp"
 #include "levels/levels.hpp"
 #include "score/data.hpp"
