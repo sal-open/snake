@@ -33,10 +33,11 @@ void Screen::gameboard()
     window.y = offset.y + HEIGHT;
     window.x = offset.x + WIDTH;
 
-    win = newwin(HEIGHT, WIDTH, offset.y, offset.x);
+    box_win = newwin(HEIGHT, WIDTH, offset.y, offset.x);
+    board = newwin(HEIGHT - 2, WIDTH - 2, offset.y + 1, offset.x + 1);
 
-    box(win, 0, 0);
-    wrefresh(win);
+    box(box_win, 0, 0);
+    wrefresh(box_win);
 }
 
 void Screen::end(int code)
@@ -50,7 +51,7 @@ pair Screen::get_Gameboard()
     return window;
 }
 
-WINDOW* Screen::get_Window()
+WINDOW* Screen::get_Board()
 {
-    return win;
+    return board;
 }

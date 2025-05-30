@@ -19,17 +19,17 @@
 class Screen
 {
 private:
-    pair window;
+    pair window;        // Coordinate di box_win
 
-    WINDOW *win;
+    WINDOW *box_win;    // La finestra utilizzata per fare il bordo
+    WINDOW *board;      // La finestra utilizzata per tutte le interazioni
 
 public:
-    Snake snake;
     Menu menu();
 
     Screen();
     pair get_Gameboard();
-    WINDOW* get_Window();
+    WINDOW* get_Board();
     void init();
     void gameboard();
     void end(int code);

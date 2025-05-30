@@ -11,9 +11,16 @@ int main() {
     
     terminal.gameboard();
 
-    terminal.snake.gen(terminal.get_Gameboard());
+    // terminal.snake.gen(terminal.get_Gameboard());
 
-    terminal.snake.move(terminal.get_Window(), terminal.get_Gameboard());
+    // terminal.snake.move(terminal.get_Window(), terminal.get_Gameboard());
+
+    getch();
+
+    wclear(terminal.get_Board());
+    wrefresh(terminal.get_Board());
+
+    getch();
 
     terminal.end(0);
 }
