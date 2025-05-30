@@ -16,23 +16,25 @@
 #include "../snake/snake.hpp"
 #include "../utilities.hpp"
 
+class Menu;
+
 class Screen
 {
 private:
-    pair window;        // Coordinate di box_win
-
-    WINDOW *box_win;    // La finestra utilizzata per fare il bordo
-    WINDOW *board;      // La finestra utilizzata per tutte le interazioni
+    pair _screen;       // Dimensioni dello schermo
+    pair _offset;       // Quanto è distante la finestra dai bordi
+    pair _gameboard;    // Estremi della finestra
 
 public:
-    Menu menu();
-
     Screen();
-    pair get_Gameboard();
-    WINDOW* get_Board();
     void init();
-    void gameboard();
-    void end(int code);
+    void end();
+    pair get_Screen();
+    pair get_Offset();
+    pair get_Gameboard();
+    WINDOW* interface();
+
+    Menu menu{*this};
 };
 
 #endif //GRAPHICS_H

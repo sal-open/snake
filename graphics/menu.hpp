@@ -5,19 +5,19 @@
 #include <ncurses.h>
 #include "../utilities.hpp"
 
+class Screen;
+
 class Menu {
 private:
-    const char* title;
-    static const char* items[];
-    static const char  triggers[];
-    static const int   count;
+    Screen &terminal;
+    const char* items[MENU] = { "Nuova partita", "Punteggi", "Informazioni", "Esci" };
+    const char  triggers[MENU] = { 'n', 'p', 'i', 'e' };
 
-    static void renderMenu(WINDOW* win, const char* title, int selected);
-    static int interactMenu(WINDOW* win, const char* title);
+    void renderMenu(WINDOW* win, const char* title, int selected);
+    int interactMenu(WINDOW* win, const char* title);
 
 public:
-    Menu(const char* title);
-
+    Menu(Screen &s);
     int run();
 };
 

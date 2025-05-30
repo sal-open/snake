@@ -9,8 +9,12 @@
 
 #include "screen.hpp"
 
-Screen::Screen() {}
+// Costruttore
+Screen::Screen()
+  : _screen{0, 0}, _offset{0, 0}, _gameboard{0, 0} {
+}
 
+// Inizializzazione / terminazione
 void Screen::init()
 {
     initscr();
@@ -21,37 +25,46 @@ void Screen::init()
     start_color();
     use_default_colors();
     refresh();
-}
-
-void Screen::gameboard()
-{
-    getmaxyx(stdscr, screen.y, screen.x);
     
-    offset.y = screen.y/2 - HEIGHT/2;
-    offset.x = screen.x/2 - WIDTH/2,
+    getmaxyx(stdscr, _screen.y, _screen.x);
+    
+    _offset.y = _screen.y/2 - HEIGHT/2;
+    _offset.x = _screen.x/2 - WIDTH/2,
 
-    window.y = offset.y + HEIGHT;
-    window.x = offset.x + WIDTH;
-
-    box_win = newwin(HEIGHT, WIDTH, offset.y, offset.x);
-    board = newwin(HEIGHT - 2, WIDTH - 2, offset.y + 1, offset.x + 1);
-
-    box(box_win, 0, 0);
-    wrefresh(box_win);
+    _gameboard.y = _offset.y + HEIGHT;
+    _gameboard.x = _offset.x + WIDTH;
 }
 
-void Screen::end(int code)
+void Screen::end()
 {
     endwin();
-    exit(code);
+    exit(0);
+}
+
+// Getters
+
+pair Screen::get_Screen()
+{
+    return _screen;
+}
+
+pair Screen::get_Offset()
+{
+    return _offset;
 }
 
 pair Screen::get_Gameboard()
 {
-    return window;
+    return _gameboard;
 }
 
-WINDOW* Screen::get_Board()
-{
-    return board;
+// Funzione di crezione interfaccia
+
+WINDOW* Screen::interface() {
+    WINDOW* interface = newwin(HEIGHT, WIDTH, _offset.y, _offset.x);
+
+    box(interface, 0, 0);
+    wrefresh(interface);
+
+    return interface;
 }
