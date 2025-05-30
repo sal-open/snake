@@ -17,19 +17,16 @@
 #include <termios.h>
 #include "../utilities.hpp"
 
-enum arrow
-{
+enum arrow {
     UP, DOWN, LEFT, RIGHT
 };
 
-struct snake
-{
+struct snake {
     pair head;
     snake *tail;
 };
 
-class Snake
-{
+class Snake {
 private:
     bool alive = true;
 
@@ -41,7 +38,7 @@ public:
     void gen(pair window);
     void checks(pair window);
     void spawn();
-    void get_Input();
+    void getInput();
     void move(WINDOW * win, pair window);
     void pop();
     void push();

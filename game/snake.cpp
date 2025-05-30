@@ -19,8 +19,8 @@ void Snake::gen(pair window)
 
     for (int i = 0; i < 4; i++)
     {
-        tmp->head.y = window.y - HEIGHT / 2 + i;
-        tmp->head.x = window.x - WIDTH / 2;
+        tmp->head.y = window.y - HEIGHT_G / 2 + i;
+        tmp->head.x = window.x - WIDTH_G / 2;
         if (i < 3)
         {
             tmp->tail = new snake;
@@ -56,20 +56,20 @@ void Snake::spawn()
 
 void Snake::checks(pair window)
 {
-    if (player->head.x <= window.x - WIDTH)
+    if (player->head.x <= window.x - WIDTH_G)
         player->head.x = window.x - 3;
     else if (player->head.x >= window.x - 2)
-        player->head.x = window.x - WIDTH + 2;
+        player->head.x = window.x - WIDTH_G + 2;
 
-    if (player->head.y <= window.y - HEIGHT)
+    if (player->head.y <= window.y - HEIGHT_G)
         player->head.y = window.y - 3;
     else if (player->head.y >= window.y - 2)
-        player->head.y = window.y - HEIGHT;
+        player->head.y = window.y - HEIGHT_G;
 }
 
 // Metodo per ricevere l'input da tastiera
 
-void Snake::get_Input()
+void Snake::getInput()
 {
     nodelay(stdscr, TRUE);
 
@@ -107,7 +107,7 @@ void Snake::move(WINDOW *win, pair window)
 {
     while (alive)
     {
-        this->get_Input();
+        this->getInput();
         napms(200);
 
         this->pop();

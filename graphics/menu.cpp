@@ -52,12 +52,20 @@ int Menu::interactMenu(WINDOW* win) {
     }
 }
 
-void menuRedirect(int selection) {
-    
-}
-
 void Menu::run() {
     WINDOW *win = terminal.interface('m');
 
-    interactMenu(win);
+    while (true) {
+        switch (interactMenu(win)) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            terminal.end();
+            break;
+        }
+    }
 }

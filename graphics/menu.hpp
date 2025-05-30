@@ -18,6 +18,7 @@ private:
 
 public:
     Menu(Screen &s);
+
     void run();
 };
 

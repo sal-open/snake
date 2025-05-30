@@ -13,13 +13,12 @@
 #include <iostream>
 #include <ncurses.h>
 #include "menu.hpp"
-#include "../snake/snake.hpp"
+#include "../game/snake.hpp"
 #include "../utilities.hpp"
 
 class Menu;
 
-class Screen
-{
+class Screen {
 private:
     pair _screen;       // Dimensioni dello schermo
 

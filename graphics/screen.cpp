@@ -15,8 +15,7 @@ Screen::Screen()
 }
 
 // Inizializzazione / terminazione
-void Screen::init()
-{
+void Screen::init() {
     initscr();
     curs_set(0);
     noecho();
@@ -29,16 +28,14 @@ void Screen::init()
     getmaxyx(stdscr, _screen.y, _screen.x);
 }
 
-void Screen::end()
-{
+void Screen::end() {
     endwin();
     exit(0);
 }
 
 // Getters
 
-pair Screen::getScreen()
-{
+pair Screen::getScreen() {
     return _screen;
 }
 
