@@ -5,14 +5,12 @@ Menu::Menu(Screen &s): terminal(s) {
 }
 
 void Menu::renderMenu(WINDOW* win, const char* title, int selected) {
-    werase(win);
-    box(win, 0, 0);
-    
+
     int width = getmaxx(win);
     mvwprintw(win, 1, (width - (int)strlen(title)) / 2, "%s", title);
     for (int i = 0; i < MENU; ++i) {
         const char* text = this->items[i];
-        int y = 3 + i * 2;
+        int y = getmaxy(win)/3 + i * 2;
         int x = (width - (int)strlen(text)) / 2;
         if (i == selected) {
             wattron(win, A_REVERSE);
@@ -25,8 +23,11 @@ void Menu::renderMenu(WINDOW* win, const char* title, int selected) {
     wrefresh(win);
 }
 
-int Menu::interactMenu(WINDOW* win, const char* title) {
+int Menu::interactMenu(WINDOW* win) {
     int selected = 0;
+    char title[] = "MENU";
+
+    keypad(win, TRUE);
 
     while (true) {
         renderMenu(win, title, selected);
@@ -43,20 +44,20 @@ int Menu::interactMenu(WINDOW* win, const char* title) {
             case '\n':
                 return selected;
             default:
-                for (int i = 0; i < MENU; ++i) {
-                    if (ch == triggers[i]) {
-                        return i;
-                    }
+                for (int i = 0; i < MENU; i++) {
+                    if (ch == triggers[i]) return i;
                 }
                 break;
         }
     }
 }
 
-int Menu::run() {
-    WINDOW *win = terminal.interface();
+void menuRedirect(int selection) {
+    
+}
 
-    int choice = interactMenu(win, "Menu");
+void Menu::run() {
+    WINDOW *win = terminal.interface('m');
 
-    return choice;
+    interactMenu(win);
 }

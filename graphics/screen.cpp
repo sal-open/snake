@@ -11,7 +11,7 @@
 
 // Costruttore
 Screen::Screen()
-  : _screen{0, 0}, _offset{0, 0}, _gameboard{0, 0} {
+  : _screen{0, 0} {
 }
 
 // Inizializzazione / terminazione
@@ -27,12 +27,6 @@ void Screen::init()
     refresh();
     
     getmaxyx(stdscr, _screen.y, _screen.x);
-    
-    _offset.y = _screen.y/2 - HEIGHT/2;
-    _offset.x = _screen.x/2 - WIDTH/2,
-
-    _gameboard.y = _offset.y + HEIGHT;
-    _gameboard.x = _offset.x + WIDTH;
 }
 
 void Screen::end()
@@ -43,25 +37,30 @@ void Screen::end()
 
 // Getters
 
-pair Screen::get_Screen()
+pair Screen::getScreen()
 {
     return _screen;
 }
 
-pair Screen::get_Offset()
-{
-    return _offset;
-}
-
-pair Screen::get_Gameboard()
-{
-    return _gameboard;
-}
-
 // Funzione di crezione interfaccia
 
-WINDOW* Screen::interface() {
-    WINDOW* interface = newwin(HEIGHT, WIDTH, _offset.y, _offset.x);
+WINDOW* Screen::interface(char flag) {
+    WINDOW* interface;
+    pair offset{0,0};
+
+    switch (flag)
+    {
+    case 'm':
+        offset.y = this->getScreen().y/2 - HEIGHT_M/2;
+        offset.x = this->getScreen().x/2 - WIDTH_M/2;
+        interface = newwin(HEIGHT_M, WIDTH_M, offset.y, offset.x);
+        break;
+    case 'g':
+        offset.y = this->getScreen().y/2 - HEIGHT_G/2;
+        offset.x = this->getScreen().x/2 - WIDTH_G/2;
+        interface = newwin(HEIGHT_G, WIDTH_G, offset.y, offset.x);
+        break;
+    }
 
     box(interface, 0, 0);
     wrefresh(interface);

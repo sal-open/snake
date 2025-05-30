@@ -14,11 +14,11 @@ private:
     const char  triggers[MENU] = { 'n', 'p', 'i', 'e' };
 
     void renderMenu(WINDOW* win, const char* title, int selected);
-    int interactMenu(WINDOW* win, const char* title);
+    int interactMenu(WINDOW* win);
 
 public:
     Menu(Screen &s);
-    int run();
+    void run();
 };
 
 #endif // MENU_HPP

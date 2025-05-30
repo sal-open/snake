@@ -5,13 +5,11 @@
 #include "snake/snake.hpp"
 
 int main() {
-    Screen terminal;
+    Screen terminal{};
     
     terminal.init();
 
     terminal.menu.run();
-
-    getch();
 
     terminal.end();
 }

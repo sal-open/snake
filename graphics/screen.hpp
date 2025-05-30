@@ -22,17 +22,13 @@ class Screen
 {
 private:
     pair _screen;       // Dimensioni dello schermo
-    pair _offset;       // Quanto è distante la finestra dai bordi
-    pair _gameboard;    // Estremi della finestra
 
 public:
     Screen();
     void init();
     void end();
-    pair get_Screen();
-    pair get_Offset();
-    pair get_Gameboard();
-    WINDOW* interface();
+    pair getScreen();
+    WINDOW* interface(char flag);
 
     Menu menu{*this};
 };
