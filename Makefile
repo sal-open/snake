@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -fdiagnostics-color=always -g
 LDFLAGS = -lncurses
-SOURCES = graphics/screen.cpp graphics/menu.cpp main.cpp
+SOURCES = home/*.cpp main.cpp
 OUTPUT = output/snake
 
 all:

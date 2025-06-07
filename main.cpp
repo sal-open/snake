@@ -1,5 +1,5 @@
-#include "graphics/screen.hpp"
-#include "graphics/menu.hpp"
+#include "home/screen.hpp"
+#include "home/menu.hpp"
 #include "levels/levels.hpp"
 #include "score/data.hpp"
 #include "game/snake.hpp"
