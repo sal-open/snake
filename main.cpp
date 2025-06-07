@@ -2,7 +2,7 @@
 #include "graphics/menu.hpp"
 #include "levels/levels.hpp"
 #include "score/data.hpp"
-#include "snake/snake.hpp"
+#include "game/snake.hpp"
 
 int main() {
     Screen terminal{};
@@ -10,6 +10,4 @@ int main() {
     terminal.init();
 
     terminal.menu.run();
-
-    terminal.end();
 }
