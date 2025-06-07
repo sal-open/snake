@@ -3,7 +3,7 @@
 
 
 #include <cstring>
-#include "../graphics/screen.hpp"
+#include "screen.hpp"
 #include "../utilities.hpp"
 
 class Info {
