@@ -27,7 +27,7 @@ public:
     void init();
     void end();
     pair getScreen();
-    WINDOW* interface(char flag);
+    WINDOW* interface(int height, int width);
 
     Menu menu{*this};
 };

@@ -53,7 +53,7 @@ int Menu::interactMenu(WINDOW* win) {
 }
 
 void Menu::run() {
-    WINDOW *win = terminal.interface('m');
+    WINDOW *win = terminal.interface(HEIGHT_M, WIDTH_M);
 
     while (true) {
         switch (interactMenu(win)) {

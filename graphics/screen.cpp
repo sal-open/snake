@@ -41,26 +41,18 @@ pair Screen::getScreen() {
 
 // Funzione di crezione interfaccia
 
-WINDOW* Screen::interface(char flag) {
-    WINDOW* interface;
-    pair offset{0,0};
+WINDOW* Screen::interface(int height, int width) {
+    pair screenSize = this->getScreen();
 
-    switch (flag)
-    {
-    case 'm':
-        offset.y = this->getScreen().y/2 - HEIGHT_M/2;
-        offset.x = this->getScreen().x/2 - WIDTH_M/2;
-        interface = newwin(HEIGHT_M, WIDTH_M, offset.y, offset.x);
-        break;
-    case 'g':
-        offset.y = this->getScreen().y/2 - HEIGHT_G/2;
-        offset.x = this->getScreen().x/2 - WIDTH_G/2;
-        interface = newwin(HEIGHT_G, WIDTH_G, offset.y, offset.x);
-        break;
-    }
+    // Calcola le coordinate del centro dello schermo
+    int startY = screenSize.y/2 - height/2;
+    int startX = screenSize.x/2 - width/2;
 
-    box(interface, 0, 0);
-    wrefresh(interface);
+    // Fai la schermata (height)⋅(width)
+    WINDOW* win = newwin(height, width, startY, startX);
 
-    return interface;
+    box(win, 0, 0);
+    wrefresh(win);
+
+    return win;
 }
