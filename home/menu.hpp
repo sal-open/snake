@@ -3,13 +3,13 @@
 
 #include <cstring>
 #include <ncurses.h>
+#include "info.hpp"
 #include "../utilities.hpp"
-
-class Screen;
 
 class Menu {
 private:
-    Screen &terminal;
+    Info info;
+
     const char* items[MENU] = { "Nuova partita", "Punteggi", "Informazioni", "Esci" };
     const char  triggers[MENU] = { 'n', 'p', 'i', 'e' };
 
@@ -17,8 +17,9 @@ private:
     int interactMenu(WINDOW* win);
 
 public:
-    Menu(Screen &s);
-
+    Menu();
+    
+    void init();
     void run();
 };
 

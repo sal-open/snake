@@ -3,26 +3,26 @@
 
 
 #include <cstring>
-#include "screen.hpp"
+#include <ncurses.h>
 #include "../utilities.hpp"
 
 class Info {
 private:
-    Screen &terminal;
-    const char* about = R"(
+    const char *about = R"(
     Tasti di scelta rapida:
-    n(uova partita) - p(unteggi)
-    i(informazioni) - e(sci).
-
+    - n(uova partita)
+    - p(unteggi)
+    - i(nformazioni)
+    - e(sci)
+    
     Comandi in gioco:
     Le freccette corrispondono
     alle direzioni usuali, mentre
     la lettera 'p' chiama il menu
-    di pausa.
-    )";
+    di pausa.)";
 
 public:
-    Info(Screen &s);
+    Info();
     void showInfo();
 };
 

@@ -1,7 +1,18 @@
 #include "menu.hpp"
-#include "screen.hpp"
+#include "info.hpp"
 
-Menu::Menu(Screen &s): terminal(s) {
+Menu::Menu() {
+}
+
+void Menu::init() {
+    initscr();
+    curs_set(0);
+    noecho();
+    cbreak();
+    keypad(stdscr, TRUE);
+    start_color();
+    use_default_colors();
+    refresh();
 }
 
 void Menu::renderMenu(WINDOW* win, const char* title, int selected) {
@@ -53,18 +64,22 @@ int Menu::interactMenu(WINDOW* win) {
 }
 
 void Menu::run() {
-    WINDOW *win = terminal.interface(HEIGHT_M, WIDTH_M);
+    WINDOW *menu = interface(HEIGHT_M, WIDTH_M);
+
+    box(menu, 0, 0);
 
     while (true) {
-        switch (interactMenu(win)) {
+        switch (interactMenu(menu)) {
         case 0:
             break;
         case 1:
             break;
         case 2:
+            info.showInfo();
+            box(menu, 0, 0);
             break;
         case 3:
-            terminal.end();
+            end();
             break;
         }
     }

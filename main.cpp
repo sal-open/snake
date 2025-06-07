@@ -1,13 +1,12 @@
-#include "home/screen.hpp"
 #include "home/menu.hpp"
+#include "home/info.hpp"
 #include "levels/levels.hpp"
 #include "score/data.hpp"
 #include "game/snake.hpp"
 
 int main() {
-    Screen terminal{};
-    
-    terminal.init();
+    Menu menu{};
 
-    terminal.menu.run();
+    menu.init();
+    menu.run();
 }
