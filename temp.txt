@@ -1,0 +1,12 @@
+ID:1749571912
+Nickname:Giovanni
+Punteggio:5656
+ID:1749571912
+Nickname:Maria
+Punteggio:2003
+ID:1749571912
+Nickname:Anna
+Punteggio:495
+ID:1749571912
+Nickname:Luca
+Punteggio:12

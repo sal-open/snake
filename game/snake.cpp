@@ -8,10 +8,13 @@
 */
 
 #include "snake.hpp"
+#include <ncurses.h>
 
 Snake::Snake() {}
 
 // Metodo per generare le cordinate iniziali
+
+
 
 void Snake::gen(pair window)
 {
@@ -21,6 +24,7 @@ void Snake::gen(pair window)
     {
         tmp->head.y = window.y - HEIGHT_G / 2 + i;
         tmp->head.x = window.x - WIDTH_G / 2;
+        
         if (i < 3)
         {
             tmp->tail = new snake;

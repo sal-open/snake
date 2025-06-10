@@ -23,7 +23,7 @@ public:
     Data(const char *new_nickname, double new_points);
     void Save();
     static void Print();
-    void mostraPunteggi();
+    static void mostraPunteggiNcurses();
 };
 
 #endif // DATA_H

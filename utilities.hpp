@@ -3,7 +3,7 @@
 
 #define MENU 4          // Number of options in the main menu
 #define HEIGHT_M 15     // Menu
-#define WIDTH_M 30
+#define WIDTH_M 40
 #define HEIGHT_G 20     // Game
 #define WIDTH_G 70
 #define HEIGHT_I 15     // Info
