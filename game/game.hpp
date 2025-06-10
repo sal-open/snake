@@ -36,23 +36,19 @@ class Game {
             pair window_dims;
             
             // Generiamo il serpente passandogli le dimensioni dello schermo
-            WINDOW* win_game = interface(HEIGHT_G, WIDTH_G);
-            getmaxyx(win_game, window_dims.y, window_dims.x);
+            WINDOW* win_game = newwin(HEIGHT_G, WIDTH_G, 0, 0);
             box(win_game, 0, 0);
+            getmaxyx(win_game, window_dims.y, window_dims.x);
             wrefresh(win_game);
             snake.gen(window_dims);
             
-            // Avviamo il loop di gioco. La funzione `move` bloccherà l'esecuzione
-            // fino alla fine della partita. Passiamo `stdscr` come finestra di gioco.
+            // Avviamo il loop di gioco. La funzione move bloccherà l'esecuzione
+            // fino alla fine della partita
             snake.move(win_game, window_dims);
-
-            // ---- Gioco finito, si ritorna al menu ----
 
             // Pulisce lo schermo dai resti del gioco
             clear();
             refresh();
-
-            // Ridisegna il box del menu e lo aggiorna, pronto per il prossimo ciclo
             
     }
 

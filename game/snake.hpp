@@ -42,6 +42,7 @@ public:
     void move(WINDOW * win, pair window);
     void pop();
     void push();
+    void reset_walls();
 };
 
 #endif // SNAKE_H

@@ -19,12 +19,12 @@ WINDOW* interface(int height, int width) {
     pair screenSize = getScreen();
 
     // Calcola le coordinate del centro dello schermo
-    int startY = screenSize.y/2 - height/2;
-    int startX = screenSize.x/2 - width/2;
+    int startY = (screenSize.y - height) / 2;
+    int startX = (screenSize.x - width) / 2;
 
-    // Fai la schermata (height)⋅(width)
+    // Crea la finestra centrata
     WINDOW *win = newwin(height, width, startY, startX);
-
+    box(win, 0, 0);
     wrefresh(win);
 
     return win;
