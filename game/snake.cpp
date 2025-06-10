@@ -63,7 +63,7 @@ void Snake::spawn()
 
 // Metodo per verificare lo status del serpente
 
-void Snake::checks(pair window)
+void Snake::checkWalls()
 {
     //TODO: sistemare il comportamento di reset wall per fare in modo che si 
     // attivi solo quando il serpente è sopra il bordo
@@ -84,6 +84,18 @@ void Snake::checks(pair window)
         player->head.y = 2;
     }
         
+}
+
+// int x_current, int y_current sono le posizioni della mela corrente
+void Snake::checkForApple(){
+    // Prendiamo le coordinate della mela corrente
+    // TODO: trovare il modo di non chiamare la funzione ad ogni movimento - Passo e chiudo, buonanotte.
+    coordinate coordMela = this->apples.getCurrentCoordinate();
+    // se la testa del player si trova nella posizione giusta
+    if(player->head.y == coordMela.posY && player->head.x == coordMela.posY){
+        // chiama la funzione che toglie la mela dalla lista e restituisce la seconda
+
+    }
 }
 
 // Metodo per ricevere l'input da tastiera
@@ -133,7 +145,7 @@ void Snake::move(WINDOW *win, pair window)
         this->push();
         this->spawn();
 
-        this->checks(window);
+        this->checkWalls();
 
         wrefresh(win);
         

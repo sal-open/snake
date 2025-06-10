@@ -3,9 +3,10 @@
 #include "levels/levels.hpp"
 #include "score/data.hpp"
 #include "game/snake.hpp"
+#include "game/apple.hpp"
 
 int main() {
-    Menu menu{};
+    /* Menu menu{};
 
 
     Data a("Giovanni", 5656.0);
@@ -21,5 +22,11 @@ int main() {
     
 
     menu.init();
-    menu.run();
+    menu.run(); */
+
+    Apple* app = new Apple(10);
+    
+
+
+
 }

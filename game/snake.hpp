@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <termios.h>
 #include "../utilities.hpp"
+#include "apple.hpp"
 
 enum arrow {
     UP, DOWN, LEFT, RIGHT
@@ -29,14 +30,16 @@ struct snake {
 class Snake {
 private:
     bool alive = true;
-
     snake *player = new snake;
     arrow direction = UP;
+    
 
 public:
+    Apple apples;
     Snake();
     void gen(pair window);
-    void checks(pair window);
+    void checkWalls();
+    void checkForApple();
     void spawn();
     void getInput();
     void move(WINDOW * win, pair window);

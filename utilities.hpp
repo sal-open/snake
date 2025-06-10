@@ -1,5 +1,6 @@
 #ifndef UITILITIES_H
 #define UITILITIES_H
+#include "ncurses.h"
 
 #define MENU 4          // Number of options in the main menu
 #define HEIGHT_M 15     // Menu
@@ -8,6 +9,7 @@
 #define WIDTH_G 70
 #define HEIGHT_I 15     // Info
 #define WIDTH_I 40
+
 
 struct pair {
     int x;
