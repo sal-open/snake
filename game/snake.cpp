@@ -2,7 +2,7 @@
 * Laurea Triennale in Informatica - Alma Mater Studiorum.
 * 
 * Corso: Programmazione (00819).
-* Studente: Salvatore Bruzzese.
+* Studente: Salvatore Bruzzese, Pietro Tombaccini.
 * 
 * Descrizione: .
 */
@@ -10,6 +10,7 @@
 #include "snake.hpp"
 #include <ncurses.h>
 
+// TODO: inizializzare apples all'interno della classe Snake
 Snake::Snake() {}
 
 // Metodo per generare le cordinate iniziali
