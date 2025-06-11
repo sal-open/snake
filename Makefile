@@ -6,7 +6,7 @@ OUTPUT = ./output
 
 all:
 	mkdir -p $(OUTPUT)
-	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(OUTPUT) $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(OUTPUT)/snake $(LDFLAGS)
 
 clean:
 	rm -f $(OUTPUT)
