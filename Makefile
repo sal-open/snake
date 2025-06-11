@@ -1,11 +1,11 @@
 CXX = g++
-CXXFLAGS = -fdiagnostics-color=always -g -I. -Igame
+CXXFLAGS = -std=c++17 -fdiagnostics-color=always -g -I.
 LDFLAGS = -lncurses
-SOURCES = home/*.cpp score/*.cpp utilities.cpp main.cpp  game/*.cpp game/*.hpp
-OUTPUT = output/snake
+SOURCES = game/*.cpp home/*.cpp score/*.cpp utilities.cpp main.cpp
+OUTPUT = ./output
 
 all:
-	mkdir -p output
+	mkdir -p $(OUTPUT)
 	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(OUTPUT) $(LDFLAGS)
 
 clean:
