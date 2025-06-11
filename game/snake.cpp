@@ -8,7 +8,6 @@
 */
 
 #include "snake.hpp"
-#include <ncurses.h>
 
 // TODO: inizializzare apples all'interno della classe Snake
 Snake::Snake() {}

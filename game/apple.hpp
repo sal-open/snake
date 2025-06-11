@@ -1,11 +1,11 @@
 #ifndef APPLE_H
 #define APPLE_H
 
-#include "../utilities.hpp"
-#include "iostream"
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <ncurses.h>
+#include "utilities.hpp"
 
 // Definizione dei limiti della finestra di gioco
 #define MIN_X 2

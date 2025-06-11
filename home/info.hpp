@@ -4,7 +4,7 @@
 
 #include <cstring>
 #include <ncurses.h>
-#include "../utilities.hpp"
+#include "utilities.hpp"
 
 class Info {
 private:

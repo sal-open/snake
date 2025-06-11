@@ -13,7 +13,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include "snake.hpp"
-#include "../utilities.hpp"
+#include "utilities.hpp"
 
 class Game {
     private:

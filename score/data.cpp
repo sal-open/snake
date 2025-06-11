@@ -1,5 +1,4 @@
 #include "data.hpp"
-#include <ncurses.h>
 
 // Costruttori
 Data::Data() : id{time(0)}, points{0} {}

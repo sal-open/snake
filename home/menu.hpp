@@ -4,7 +4,7 @@
 #include <cstring>
 #include <ncurses.h>
 #include "info.hpp"
-#include "../utilities.hpp"
+#include "utilities.hpp"
 
 class Menu {
 private:

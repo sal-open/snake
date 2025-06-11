@@ -6,9 +6,9 @@
 #include "game/apple.hpp"
 
 int main() {
-    /* Menu menu{};
+    Menu menu{};
 
-
+    /*
     Data a("Giovanni", 5656.0);
     Data b("Maria", 2003.0);
     Data c("Luca", 12.0);
@@ -19,10 +19,10 @@ int main() {
     c.Save();
     d.Save();
 
-    
+    */
 
     menu.init();
-    menu.run(); */
+    menu.run();
 
     Apple* app = new Apple(10);
     

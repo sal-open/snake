@@ -3,7 +3,6 @@
 #include "info.hpp"
 #include "score/data.hpp"
 #include "game/snake.hpp"
-#include <ncurses.h>
 
 Menu::Menu() {}
 

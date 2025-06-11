@@ -15,7 +15,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include <termios.h>
-#include "../utilities.hpp"
+#include "utilities.hpp"
 #include "apple.hpp"
 
 enum arrow {
