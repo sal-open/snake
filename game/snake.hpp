@@ -35,7 +35,10 @@ private:
     
 
 public:
-    Apple apples;
+    Apple app;
+    int score = 0;
+    // Levels levels;
+
     Snake();
     void gen(pair window);
     void checkWalls();

@@ -1,21 +1,21 @@
 /*
-* Laurea Triennale in Informatica - Alma Mater Studiorum.
-* 
-* Corso: Programmazione (00819).
-* Studente: Salvatore Bruzzese, Pietro Tombaccini.
-* 
-* Descrizione: .
-*/
+ * Laurea Triennale in Informatica - Alma Mater Studiorum.
+ *
+ * Corso: Programmazione (00819).
+ * Studente: Salvatore Bruzzese, Pietro Tombaccini.
+ *
+ * Descrizione: .
+ */
 
 #include "snake.hpp"
 
 // TODO: inizializzare apples all'interno della classe Snake
-Snake::Snake() {}
+Snake::Snake()
+{
+    this->app = Apple();
+}
 
 // Metodo per generare le cordinate iniziali
-
-
-
 void Snake::gen(pair window)
 {
     snake *tmp = player;
@@ -28,7 +28,7 @@ void Snake::gen(pair window)
     {
         tmp->head.y = center_y + i;
         tmp->head.x = center_x;
-        
+
         if (i < 3)
         {
             tmp->tail = new snake;
@@ -40,11 +40,11 @@ void Snake::gen(pair window)
         }
     }
 
+    this->app.print();
     this->spawn();
 }
 
 // Metodo per visualizzare il corpo del serpente
-
 void Snake::spawn()
 {
     snake *tmp = player;
@@ -58,48 +58,47 @@ void Snake::spawn()
         attroff(COLOR_PAIR(1));
         tmp = tmp->tail;
     }
-    
 }
 
 // Metodo per verificare lo status del serpente
-
 void Snake::checkWalls()
 {
-    //TODO: sistemare il comportamento di reset wall per fare in modo che si 
-    // attivi solo quando il serpente è sopra il bordo
+    // TODO: sistemare il comportamento di reset wall per fare in modo che si
+    //  attivi solo quando il serpente è sopra il bordo
     this->reset_walls();
     // Controllo dei bordi orizzontali
-    if (player->head.x <= 0){
-        player->head.x = WIDTH_G - 2;
+    if (player->head.x <= 0)
+    {
+        player->head.x = WIDTH_G - 1;
     }
-    else if (player->head.x >= WIDTH_G - 1){
-        player->head.x = 2;
+    else if (player->head.x >= WIDTH_G - 1)
+    {
+        player->head.x = 1;
     }
 
     // Controllo dei bordi verticali
-    if (player->head.y <= 0){
-        player->head.y = HEIGHT_G - 2;
+    if (player->head.y <= 0)
+    {
+        player->head.y = HEIGHT_G - 1;
     }
-    else if (player->head.y >= HEIGHT_G - 1){
-        player->head.y = 2;
+    else if (player->head.y >= HEIGHT_G - 1)
+    {
+        player->head.y = 1;
     }
-        
 }
 
 // int x_current, int y_current sono le posizioni della mela corrente
-void Snake::checkForApple(){
-    // Prendiamo le coordinate della mela corrente
-    // TODO: trovare il modo di non chiamare la funzione ad ogni movimento - Passo e chiudo, buonanotte.
-    coordinate coordMela = this->apples.getCurrentCoordinate();
-    // se la testa del player si trova nella posizione giusta
-    if(player->head.y == coordMela.posY && player->head.x == coordMela.posY){
-        // chiama la funzione che toglie la mela dalla lista e restituisce la seconda
-
+void Snake::checkForApple()
+{
+    coordinate coordMela = this->app.getCurrentCoordinate();
+    if (player->head.y == coordMela.posY && player->head.x == coordMela.posX)
+    {
+        this->app.createApple();
+        this->score += 10;
     }
 }
 
 // Metodo per ricevere l'input da tastiera
-
 void Snake::getInput()
 {
     nodelay(stdscr, TRUE);
@@ -109,11 +108,13 @@ void Snake::getInput()
     flushinp();
     switch (ch)
     {
-    case 'q':                   // Quit
+    case 'q': // Quit
         alive = false;
         break;
-    case 'p':                   // Pause
-        while (getch() != 'p') {};
+    case 'p': // Pause
+        while (getch() != 'p')
+        {
+        };
         break;
     case KEY_UP:
         if (direction != DOWN)
@@ -136,6 +137,10 @@ void Snake::getInput()
 
 void Snake::move(WINDOW *win, pair window)
 {
+    // Mostra il punteggio iniziale
+    mvprintw(0, 2, "Score: %d", this->score);
+    refresh();
+
     while (alive)
     {
         this->getInput();
@@ -144,16 +149,21 @@ void Snake::move(WINDOW *win, pair window)
         this->pop();
         this->push();
         this->spawn();
-
+        this->app.print();
         this->checkWalls();
+        this->checkForApple();
+
+        // Aggiorna il punteggio
+        mvprintw(0, 2, "Score: %d", this->score);
+        refresh();
 
         wrefresh(win);
-        
     }
 }
 
-void Snake::reset_walls(){
-    WINDOW* win_game = newwin(HEIGHT_G, WIDTH_G, 0, 0);
+void Snake::reset_walls()
+{
+    WINDOW *win_game = newwin(HEIGHT_G, WIDTH_G, 0, 0);
     box(win_game, 0, 0);
     wrefresh(win_game);
 }

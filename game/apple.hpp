@@ -13,102 +13,64 @@
 #define MIN_Y 2
 #define MAX_Y (HEIGHT_G - 2)
 
-// IDEA: creare una lista di N mele (con n preso dal
-// livello->numeroMeleDaMangiare) successivamente ogni volta che si mangia una
-// mela la si toglie dalla lista, quando si trova NULLPTR come next, si passa al
-// livello successivo e si genera una nuova lista
-struct coordinate{
-    int posX;
-    int posY;
+// IDEA: creiamo un oggetto mela che contiene la posizione della mela, ogni volta che
+// il serpente la mangia, se ne genera una nuova in una posizione randomica
+struct coordinate
+{
+  int posX;
+  int posY;
 };
 
-struct apple {
+struct apple
+{
   coordinate coord;
-  // per struttura a linked-list
-  apple *next;
 };
 
-class Apple {
+class Apple
+{
 private:
   apple *apples;
 
 public:
-  Apple(int n) {
-    apples = nullptr;
+  Apple()
+  {
+    apples = new apple();  // Alloco la memoria per l'oggetto apple
     srand(time(NULL));
-    createLinkedList(n);
+    createApple();
   }
 
-  void createApple(int n) {
-    apples->next = nullptr;
-    apples->coord.posX = MIN_X + (rand() % (MAX_X - MIN_X + 1));
-    apples->coord.posX = MIN_Y + (rand() % (MAX_Y - MIN_Y + 1));
+  ~Apple()  // Aggiungo il distruttore per liberare la memoria
+  {
+    delete apples;
   }
-  coordinate getCurrentCoordinate(){
+
+  void createApple()
+  {
+    apples->coord.posX = MIN_X + (rand() % (MAX_X - MIN_X + 1));
+    apples->coord.posY = MIN_Y + (rand() % (MAX_Y - MIN_Y + 1));  // Corretto da posX a posY
+  }
+  coordinate getCurrentCoordinate()
+  {
     return apples->coord;
   }
 
-  void createLinkedList(int n) {
-    // Se n è 0 o negativo, non creiamo mele
-    if (n <= 0)
-      return;
-
-    // Creiamo la prima mela
-    apples = new apple;
-    createApple(1);
-
-    // Creiamo le mele successive
-    apple *current = apples;
-    for (int i = 1; i < n; i++) {
-      current->next = new apple;
-      current = current->next;
-      current->coord.posX = MIN_X + (rand() % (MAX_X - MIN_X + 1));
-      current->coord.posY = MIN_Y + (rand() % (MAX_Y - MIN_Y + 1));
-      current->next = nullptr;
-    }
-  }
-
-  void print() {
+  void print()
+  {
     // Inizializza il colore rosso per le mele
     init_pair(2, COLOR_RED, -1);
 
-    // Attraversa la lista delle mele
-    apple *current = apples;
-    while (current != nullptr) {
-      // Attiva il colore rosso
-      attron(COLOR_PAIR(2));
-      // Disegna la mela come un carattere 'O'
-      mvaddch(current->coord.posY, current->coord.posX, 'O');
-      // Disattiva il colore
-      attroff(COLOR_PAIR(2));
-
-      // Passa alla mela successiva
-      current = current->next;
-    }
+    // Attiva il colore rosso
+    attron(COLOR_PAIR(2));
+    // Disegna la mela come un carattere 'O'
+    mvaddch(apples->coord.posY, apples->coord.posX, 'O');
+    // Disattiva il colore
+    attroff(COLOR_PAIR(2));
   }
-  void printInConsole() {
-    apple *current = apples;
-    int count = 1;
-
-    while (current != nullptr) {
-      std::cout << "Mela " << count << ": posizione (" << current->coord.posX << ", "
-                << current->coord.posY << ")" << std::endl;
-      current = current->next;
-      count++;
-    }
+  void printInConsole()
+  {
+    std::cout << "Mela: posizione (" << apples->coord.posX << ", " << apples->coord.posY << ")" << std::endl;
   }
-  apple *getCurrentApple() {
 
-    std::cout << apples->coord.posX << std::endl;
-     return apples; 
-    }
-  void popApple() {
-    if (apples != nullptr) {
-      apple *temp = apples;
-      apples = apples->next;
-      delete temp;
-    }
-  }
 };
 
 #endif
