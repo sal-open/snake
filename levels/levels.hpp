@@ -31,6 +31,7 @@ public:
     void previusLevel();
     void gotoLevel(int num = 1);
     void completaLivello(int index);
+    Livello getCurrentLevel();
 };
 
 #endif // LEVELS_H

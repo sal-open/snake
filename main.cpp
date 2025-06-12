@@ -5,12 +5,10 @@
 #include "game/snake.hpp"
 #include "game/apple.hpp"
 
-int main() {
+int main()
+{
     Menu menu{};
 
     menu.init();
     menu.run();
-
-
-
 }

@@ -121,6 +121,10 @@ public:
             current = current->next;
         }
     }
+    Livello* getCurrentLevel()
+    {
+        return current;
+    }
 };
 
 #endif // LEVELS_H

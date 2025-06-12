@@ -93,6 +93,7 @@ void Snake::checkForApple()
     }
 }
 
+
 // Metodo per ricevere l'input da tastiera
 void Snake::getInput()
 {

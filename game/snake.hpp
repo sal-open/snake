@@ -39,6 +39,7 @@ public:
     int score = 0;
     // Finestra di gioco
     WINDOW *win_game;
+    // Livello corrente -> 1
 
 
     // Levels levels;
