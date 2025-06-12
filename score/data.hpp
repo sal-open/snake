@@ -14,6 +14,7 @@ private:
     static const int MAX_NICKNAME_SIZE = 100;
     static const int MAX_LINE_LENGTH = 256;
 
+    // Non lo so
     time_t id;
     char nickname[MAX_NICKNAME_SIZE];
     double points;

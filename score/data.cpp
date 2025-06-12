@@ -157,8 +157,6 @@ void Data::Print()
 // Stampa su finestra ncurses
 void Data::mostraPunteggiNcurses()
 {
-    // NON chiamare initscr(), clear(), refresh(), noecho(), cbreak() qui
-    // Sono già stati chiamati una volta all'inizio del programma.
 
     const int win_height = 25;
     const int win_width = 50;
