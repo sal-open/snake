@@ -25,7 +25,7 @@ class Game {
     WINDOW *win;
     Game(WINDOW* w){
         this->win = w;
-
+        this->snake.win_game = newwin(HEIGHT_G, WIDTH_G, 0, 0);
     }
 
     void start_game(){

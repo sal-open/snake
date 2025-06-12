@@ -37,6 +37,10 @@ private:
 public:
     Apple app;
     int score = 0;
+    // Finestra di gioco
+    WINDOW *win_game;
+
+
     // Levels levels;
 
     Snake();
