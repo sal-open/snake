@@ -79,7 +79,6 @@ void Menu::run() {
       box(menu, 0, 0);
       wrefresh(menu);
       break;
-      break;
     }
 
     case 1: {
