@@ -1,14 +1,16 @@
-#ifndef MENU_HPP
-#define MENU_HPP
+#ifndef MENU_H
+#define MENU_H
 
 #include <cstring>
 #include <ncurses.h>
+#include "game/game.hpp"
 #include "info.hpp"
 #include "utilities.hpp"
 
 class Menu {
 private:
     Info info;
+    Game game;
 
     const char* items[MENU] = { "Nuova partita", "Punteggi", "Informazioni", "Esci" };
     const char  triggers[MENU] = { 'n', 'p', 'i', 'e' };
@@ -23,4 +25,4 @@ public:
     void run();
 };
 
-#endif // MENU_HPP
+#endif // MENU_H

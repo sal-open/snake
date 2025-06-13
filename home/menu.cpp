@@ -4,7 +4,8 @@
 #include "score/data.hpp"
 #include "game/snake.hpp"
 
-Menu::Menu() {}
+Menu::Menu() {
+}
 
 void Menu::init() {
   initscr();
@@ -51,11 +52,14 @@ int Menu::interactMenu(WINDOW *win) {
     case KEY_UP:
       selected = (selected - 1 + MENU) % MENU;
       break;
+
     case KEY_DOWN:
       selected = (selected + 1) % MENU;
       break;
+
     case '\n':
       return selected;
+
     default:
       for (int i = 0; i < MENU; i++) {
         if (ch == triggers[i])
@@ -74,8 +78,8 @@ void Menu::run() {
   while (true) {
     switch (interactMenu(menu)) {
     case 0: {
-      Game* game = new Game(menu);
-      game->start_game();
+      game.startGame();
+
       box(menu, 0, 0);
       wrefresh(menu);
       break;
