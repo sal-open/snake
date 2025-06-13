@@ -23,7 +23,7 @@ void Menu::renderMenu(WINDOW *win, const char *title, int selected) {
   int width = getmaxx(win);
   mvwprintw(win, 1, (width - (int)strlen(title)) / 2, "%s", title);
   for (int i = 0; i < MENU; ++i) {
-    const char *text = this->items[i];
+    const char *text = items[i];
     int y = getmaxy(win) / 3 + i * 2;
     int x = (width - (int)strlen(text)) / 2;
     if (i == selected) {
@@ -78,7 +78,7 @@ void Menu::run() {
   while (true) {
     switch (interactMenu(menu)) {
     case 0: {
-      game.startGame();
+      game.play();
 
       box(menu, 0, 0);
       wrefresh(menu);

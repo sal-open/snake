@@ -87,12 +87,12 @@ void Data::Save()
         points_parsed = std::strtod(line + 10, NULL);
 
         // Se il mio punteggio è maggiore e non ho ancora inserito il record
-        if (this->points > points_parsed && !inserted)
+        if (points > points_parsed && !inserted)
         {
             // Inserisco prima il mio record (che ha punteggio più alto)
-            temp_file << "ID:" << this->id << "\n";
-            temp_file << "Nickname:" << this->nickname << "\n";
-            temp_file << "Punteggio:" << this->points << "\n";
+            temp_file << "ID:" << id << "\n";
+            temp_file << "Nickname:" << nickname << "\n";
+            temp_file << "Punteggio:" << points << "\n";
             inserted = true;
         }
 
@@ -105,9 +105,9 @@ void Data::Save()
     // Se non ho inserito il record (è il punteggio più basso o il file era vuoto)
     if (!inserted)
     {
-        temp_file << "ID:" << this->id << "\n";
-        temp_file << "Nickname:" << this->nickname << "\n";
-        temp_file << "Punteggio:" << this->points << "\n";
+        temp_file << "ID:" << id << "\n";
+        temp_file << "Nickname:" << nickname << "\n";
+        temp_file << "Punteggio:" << points << "\n";
     }
 
     // Chiudo e riapro per sovrascrivere il file originale

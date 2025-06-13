@@ -5,16 +5,43 @@ Game::Game() {
 
 void Game::startGame() {
     
-    WINDOW *gameWindow = interface(HEIGHT_G, WIDTH_G);
-
+    gameWindow = interface(HEIGHT_G, WIDTH_G);
     wrefresh(gameWindow);
+}
 
-    // Genera il serpente e avvia il loop
-    snake.gen();
-    snake.move(gameWindow);
-
-    // Pulisce al termine
+void Game::endGame() {
     wclear(gameWindow);
     wrefresh(gameWindow);
     delwin(gameWindow);
+}
+
+void Game::processInput() {
+    nodelay(stdscr, TRUE);
+
+    int ch = getch();
+
+    flushinp();
+
+    switch (ch)
+    {
+    case 'p':   // Pausa
+        while (getch() != 'p') {
+        };
+
+        pauseMenu.run();
+
+        break;
+    default:
+        avatar.move(gameWindow, ch);
+    }
+}
+
+void Game::play() {
+    startGame();
+    
+    avatar.gen();
+    
+    while (!gameOver) gameOver = processInput();
+
+    endGame();
 }

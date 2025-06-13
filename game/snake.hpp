@@ -35,7 +35,6 @@ private:
     bool alive = true;
     snake *player = new snake;
     arrow direction = UP;
-    
 
 public:
     int score = 0;
@@ -51,11 +50,10 @@ public:
     void checkWalls();
     void checkForApple();
     void spawn();
-    void getInput();
-    void move(WINDOW * win);
+    void setDirection(int ch);
+    void move(WINDOW * win, int ch);
     void pop();
     void push();
-    void reset_walls();
 };
 
 #endif // SNAKE_H

@@ -38,6 +38,7 @@ void Snake::gen()
     border.x = (screenSize.x - WIDTH_G) / 2;
 
     snake *tmp = player;
+    alive = true;
 
     // Calcola il centro della finestra di gioco
     int center_y = screenSize.y / 2;
@@ -59,7 +60,7 @@ void Snake::gen()
         }
     }
 
-    this->spawn();
+    spawn();
 }
 
 // Metodo per verificare lo status del serpente
@@ -90,33 +91,16 @@ void Snake::checkWalls()
 // int x_current, int y_current sono le posizioni della mela corrente
 // void Snake::checkForApple()
 // {
-//     coordinate coordMela = this->app.getCurrentCoordinate();
+//     coordinate coordMela = app.getCurrentCoordinate();
 //     if (player->head.y == coordMela.posY && player->head.x == coordMela.posX)
 //     {
-//         this->app.createApple();
-//         this->score += 10;
+//         app.createApple();
+//         score += 10;
 //     }
 // }
 
-
-// Metodo per ricevere l'input da tastiera
-void Snake::getInput()
-{
-    nodelay(stdscr, TRUE);
-
-    int ch = getch();
-
-    flushinp();
-    switch (ch)
-    {
-    case 'e':   // Esci
-        alive = false;
-        break;
-    case 'p':   // Pausa
-        while (getch() != 'p')
-        {
-        };
-        break;
+void Snake::setDirection(int ch) {
+    switch(ch) {
     case KEY_UP:
         if (direction != DOWN)
             direction = UP;
@@ -136,24 +120,24 @@ void Snake::getInput()
     }
 }
 
-void Snake::move(WINDOW *win)
+void Snake::move(WINDOW *win, int ch)
 {
-    while (alive)
+    if (alive)
     {
-        this->getInput();
+        setDirection(ch);
         if (direction == UP || direction == DOWN)
             napms(200);
         else napms(100);
 
-        this->pop();
-        this->push();
-        this->checkWalls();
-        this->spawn();
-        // this->app.print();
-        // this->checkForApple();
+        pop();
+        push();
+        checkWalls();
+        spawn();
+        // app.print();
+        // checkForApple();
 
         // Aggiorna il punteggio
-        mvprintw(border.y, border.x + 1, " Punteggio: %d ", this->score);
+        mvprintw(border.y, border.x + 1, " Punteggio: %d ", score);
 
         wrefresh(win);
     }

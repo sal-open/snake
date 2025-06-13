@@ -7,6 +7,8 @@
 #define WIDTH_M 40
 #define HEIGHT_G 20     // Game
 #define WIDTH_G 70
+#define HEIGHT_P 10     // Pause
+#define WIDTH_P 20
 #define HEIGHT_I 18     // Info
 #define WIDTH_I 40
 
