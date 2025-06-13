@@ -9,7 +9,7 @@
 class Info {
 private:
     const char *about = R"(
-    Tasti di scelta rapida:
+    Tasti di scelta rapida menu:
     - n(uova partita)
     - p(unteggi)
     - i(nformazioni)
@@ -19,7 +19,10 @@ private:
     Le freccette corrispondono
     alle direzioni usuali, mentre
     la lettera 'p' chiama il menu
-    di pausa.)";
+    di pausa.
+    
+    Premere 'e' per uscire dalla 
+    pagina informazioni.)";
 
 public:
     Info();

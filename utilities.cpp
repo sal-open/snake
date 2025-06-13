@@ -18,7 +18,7 @@ pair getScreen() {
 WINDOW* interface(int height, int width) {
     pair screenSize = getScreen();
 
-    // Calcola le coordinate del centro dello schermo
+    // Calcola le coordinate dell'origine della finestra
     int startY = (screenSize.y - height) / 2;
     int startX = (screenSize.x - width) / 2;
 
