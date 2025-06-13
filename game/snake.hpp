@@ -29,28 +29,30 @@ struct snake {
 
 class Snake {
 private:
+    pair screenSize;
+    pair border;
+
     bool alive = true;
     snake *player = new snake;
     arrow direction = UP;
     
 
 public:
-    Apple app;
     int score = 0;
-    // Finestra di gioco
-    WINDOW *win_game;
+
+    
     // Livello corrente -> 1
 
 
     // Levels levels;
 
     Snake();
-    void gen(pair window);
+    void gen();
     void checkWalls();
     void checkForApple();
     void spawn();
     void getInput();
-    void move(WINDOW * win, pair window);
+    void move(WINDOW * win);
     void pop();
     void push();
     void reset_walls();

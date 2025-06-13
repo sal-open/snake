@@ -9,18 +9,40 @@
 
 #include "snake.hpp"
 
-// TODO: inizializzare apples all'interno della classe Snake
-Snake::Snake() { this->app = Apple(); }
+Snake::Snake() {
+}
 
-// Metodo per generare le cordinate iniziali
-void Snake::gen(pair window)
+// Metodo per visualizzare il corpo del serpente
+void Snake::spawn()
 {
     snake *tmp = player;
 
-    // Calcola il centro della finestra di gioco
-    int center_y = HEIGHT_G / 2;
-    int center_x = WIDTH_G / 2;
+    init_pair(1, COLOR_GREEN, -1);
+    
+    attron(COLOR_PAIR(1));
 
+    while (tmp != nullptr)
+    {
+        mvaddch(tmp->head.y, tmp->head.x, (tmp == player ? '@' : '#'));
+        tmp = tmp->tail;
+    }
+
+    attroff(COLOR_PAIR(1));
+}
+
+// Metodo per generare le cordinate iniziali
+void Snake::gen()
+{
+    pair screenSize = getScreen();
+    border.y = (screenSize.y - HEIGHT_G) / 2;
+    border.x = (screenSize.x - WIDTH_G) / 2;
+
+    snake *tmp = player;
+
+    // Calcola il centro della finestra di gioco
+    int center_y = screenSize.y / 2;
+    int center_x = screenSize.x / 2;
+    
     for (int i = 0; i < 4; i++)
     {
         tmp->head.y = center_y + i;
@@ -37,61 +59,44 @@ void Snake::gen(pair window)
         }
     }
 
-    this->app.print();
     this->spawn();
-}
-
-// Metodo per visualizzare il corpo del serpente
-void Snake::spawn()
-{
-    snake *tmp = player;
-
-    init_pair(1, COLOR_GREEN, -1);
-
-    while (tmp != nullptr)
-    {
-        attron(COLOR_PAIR(1));
-        mvaddch(tmp->head.y, tmp->head.x, (tmp == player ? '@' : '#'));
-        attroff(COLOR_PAIR(1));
-        tmp = tmp->tail;
-    }
 }
 
 // Metodo per verificare lo status del serpente
 void Snake::checkWalls()
 {
 
-    // Controllo dei bordi orizzontali
-    if (player->head.x <= 0)
+    // Controllo dei bordi verticali
+    if (player->head.x <= border.x)
     {
-        player->head.x = WIDTH_G - 1;
+        player->head.x = border.x + WIDTH_G - 2;
     }
-    else if (player->head.x >= WIDTH_G - 1)
+    else if (player->head.x >= border.x + WIDTH_G - 1)
     {
-        player->head.x = 1;
+        player->head.x = border.x + 1;
     }
 
-    // Controllo dei bordi verticali
-    if (player->head.y <= 1)
+    // Controllo dei bordi orizzontali
+    if (player->head.y <= border.y)
     {
-        player->head.y = HEIGHT_G - 1;
+        player->head.y = border.y + HEIGHT_G - 2;
     }
-    else if (player->head.y >= HEIGHT_G - 1)
+    else if (player->head.y >= border.y + HEIGHT_G - 1)
     {
-        player->head.y = 1;
+        player->head.y = border.y + 1;
     }
 }
 
 // int x_current, int y_current sono le posizioni della mela corrente
-void Snake::checkForApple()
-{
-    coordinate coordMela = this->app.getCurrentCoordinate();
-    if (player->head.y == coordMela.posY && player->head.x == coordMela.posX)
-    {
-        this->app.createApple();
-        this->score += 10;
-    }
-}
+// void Snake::checkForApple()
+// {
+//     coordinate coordMela = this->app.getCurrentCoordinate();
+//     if (player->head.y == coordMela.posY && player->head.x == coordMela.posX)
+//     {
+//         this->app.createApple();
+//         this->score += 10;
+//     }
+// }
 
 
 // Metodo per ricevere l'input da tastiera
@@ -104,10 +109,10 @@ void Snake::getInput()
     flushinp();
     switch (ch)
     {
-    case 'q': // Quit
+    case 'e':   // Esci
         alive = false;
         break;
-    case 'p': // Pause
+    case 'p':   // Pausa
         while (getch() != 'p')
         {
         };
@@ -131,41 +136,27 @@ void Snake::getInput()
     }
 }
 
-void Snake::move(WINDOW *win, pair window)
+void Snake::move(WINDOW *win)
 {
-    // Mostra il punteggio iniziale
-    mvprintw(0, 2, "Score: %d", this->score);
-    refresh();
-
     while (alive)
     {
         this->getInput();
-        napms(200);
+        if (direction == UP || direction == DOWN)
+            napms(200);
+        else napms(100);
 
         this->pop();
         this->push();
-        this->spawn();
-        this->app.print();
         this->checkWalls();
-        this->checkForApple();
+        this->spawn();
+        // this->app.print();
+        // this->checkForApple();
 
         // Aggiorna il punteggio
-        mvprintw(0, 2, "Score: %d", this->score);
-        // TODO: sistemare il comportamento di reset wall per fare in modo che si
-        //  attivi solo quando il serpente è sopra il bordo
-        // TODO: sistemare bug del punteggio: c'è un problema con l'aggiornamento dei bordi,
-        // quando il bordo dello schermo si aggiorna scompare lo score, e poi ricompare (frazione di secondi)
-        this->reset_walls();
-        refresh();
+        mvprintw(border.y, border.x + 1, " Punteggio: %d ", this->score);
 
         wrefresh(win);
     }
-}
-
-void Snake::reset_walls()
-{
-    box(this->win_game, 0, 0);
-    wrefresh(this->win_game);
 }
 
 void Snake::pop()

@@ -8,15 +8,13 @@
 #include "utilities.hpp"
 
 class Game {
-public:
-    Game(WINDOW* parent_win);
-    ~Game();
-
-    void start_game();
-
 private:
     Snake snake;
-    WINDOW* win;
+
+public:
+    Game();
+    
+    void startGame();
 };
 
 #endif // GAME_H
