@@ -41,6 +41,7 @@ void Game::updateHeader() {
     waddch(gameWindow, ACS_HLINE);
     wprintw(gameWindow, " Tempo: %d ", TIMER - (int)difftime(now, start));
     wrefresh(gameWindow);
+    // Inserire il numero di livello e il numero di mele mancanti
 }
 
 bool Game::checkTime() {
@@ -55,6 +56,7 @@ void Game::checkForApple()
         avatar.getPosition().y == app.getPosition().y )
     {
         app.createApple();
+        // Da cambiare in base al livello 
         punteggio += 10;
     }
 }
@@ -69,7 +71,7 @@ void Game::play() {
     while (!gameOver) {
         gameOver = checkTime();
         processInput();
-        app.print(gameWindow);
+        app.print();
         checkForApple();
         updateHeader();
     }

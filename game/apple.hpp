@@ -26,7 +26,7 @@ public:
 
     void createApple();
     pair getPosition() const;
-    void print(WINDOW *win) const;
+    void print() const;
 };
 
 #endif // APPLE_H
