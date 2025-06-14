@@ -136,9 +136,6 @@ void Snake::move(WINDOW *win, int ch)
         // app.print();
         // checkForApple();
 
-        // Aggiorna il punteggio
-        mvprintw(border.y, border.x + 1, " Punteggio: %d ", score);
-
         wrefresh(win);
     }
 }

@@ -1,19 +1,25 @@
 #ifndef PAUSE_H
 #define PAUSE_H
 
+#include <cstring>
 #include <ncurses.h>
 #include "utilities.hpp"
 
 class Pause {
 private:
     WINDOW *menu;
+    const char *menu_header = " PARTITA IN PAUSA";
+    const char* items[11] = { "1", "2", "3", "4", "5",
+                              "6", "7", "8", "9", "10",
+                              "Termina partita" };
 
-    void render();
+
+    void render(int selected);
     int interact();
 
 public:
     Pause();
-    void run();
+    int run();
 };
 
 #endif // PAUSE_H
