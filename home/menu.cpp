@@ -18,35 +18,35 @@ void Menu::init() {
   refresh();
 }
 
-void Menu::renderMenu(WINDOW *win, const char *title, int selected) {
+void Menu::renderMenu(int selected) {
 
-  int width = getmaxx(win);
-  mvwprintw(win, 1, (width - (int)strlen(title)) / 2, "%s", title);
-  for (int i = 0; i < MENU; ++i) {
+  mvwprintw(menu, 1, (WIDTH_M - (int)strlen(title)) / 2, "%s", title);
+
+  for (int i = 0; i < MENU; i++) {
     const char *text = items[i];
-    int y = getmaxy(win) / 3 + i * 2;
-    int x = (width - (int)strlen(text)) / 2;
+    
+    int y = HEIGHT_M / 3 + i * 2;
+    int x = (WIDTH_M - (int)strlen(text)) / 2;
+
     if (i == selected) {
-      wattron(win, A_REVERSE);
-      mvwprintw(win, y, x, "%s", text);
-      wattroff(win, A_REVERSE);
-    } else {
-      mvwprintw(win, y, x, "%s", text);
+      wattron(menu, A_REVERSE);
+      mvwprintw(menu, y, x, "%s", text);
+      wattroff(menu, A_REVERSE);
     }
+    else mvwprintw(menu, y, x, "%s", text);
   }
-  wrefresh(win);
+  wrefresh(menu);
 }
 
-int Menu::interactMenu(WINDOW *win) {
+int Menu::interactMenu(WINDOW *menu) {
   int selected = 0;
-  char title[] = "MENU";
 
-  keypad(win, TRUE);
+  keypad(menu, TRUE);
 
   while (true) {
-    renderMenu(win, title, selected);
+    renderMenu(selected);
 
-    int ch = wgetch(win);
+    int ch = wgetch(menu);
 
     switch (ch) {
     case KEY_UP:
@@ -71,7 +71,7 @@ int Menu::interactMenu(WINDOW *win) {
 }
 
 void Menu::run() {
-  WINDOW *menu = interface(HEIGHT_M, WIDTH_M);
+  menu = interface(HEIGHT_M, WIDTH_M);
 
   box(menu, 0, 0);
 

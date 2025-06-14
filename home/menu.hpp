@@ -12,10 +12,13 @@ private:
     Info info;
     Game game;
 
+    WINDOW *menu;
+
+    const char *title = "MENU";
     const char* items[MENU] = { "Nuova partita", "Punteggi", "Informazioni", "Esci" };
     const char  triggers[MENU] = { 'n', 'p', 'i', 'e' };
 
-    void renderMenu(WINDOW* win, const char* title, int selected);
+    void renderMenu(int selected);
     int interactMenu(WINDOW* win);
 
 public:
