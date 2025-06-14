@@ -5,6 +5,7 @@ Game::Game() {
 
 void Game::startGame() {
     start = time(nullptr);
+    gameOver = false;
 
     gameWindow = interface(HEIGHT_G, WIDTH_G);
     wrefresh(gameWindow);
@@ -32,8 +33,6 @@ void Game::processInput() {
     default:
         avatar.move(gameWindow, ch);
     }
-
-
 }
 
 void Game::updateHeader() {

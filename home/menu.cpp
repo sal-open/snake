@@ -80,8 +80,6 @@ void Menu::run() {
     case 0: {
       game.play();
 
-      box(menu, 0, 0);
-      wrefresh(menu);
       break;
     }
 
@@ -89,15 +87,14 @@ void Menu::run() {
       Data::mostraPunteggiNcurses(); // mantiene ncurses attivo
       clear();
       refresh();
-      box(menu, 0, 0);
-      wrefresh(menu);
+
       keypad(menu, true);
       break;
     }
 
     case 2: {
       info.showInfo();
-      box(menu, 0, 0);
+      
       break;
     }
 
@@ -106,5 +103,7 @@ void Menu::run() {
       break;
     }
     }
+    box(menu, 0, 0);
+    wrefresh(menu);
   }
 }
