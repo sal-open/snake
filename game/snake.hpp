@@ -36,10 +36,7 @@ private:
     snake *player = new snake;
     arrow direction = UP;
 
-public:
-    int score = 0;
-
-    
+public:    
     // Livello corrente -> 1
 
 
@@ -48,10 +45,10 @@ public:
     Snake();
     void gen();
     void checkWalls();
-    void checkForApple();
     void spawn();
     void setDirection(int ch);
     void move(WINDOW * win, int ch);
+    pair getPosition();
     void pop();
     void push();
 };

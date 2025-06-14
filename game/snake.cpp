@@ -39,6 +39,7 @@ void Snake::gen()
 
     snake *tmp = player;
     alive = true;
+    direction = UP;
 
     // Calcola il centro della finestra di gioco
     int center_y = screenSize.y / 2;
@@ -88,17 +89,6 @@ void Snake::checkWalls()
     }
 }
 
-// int x_current, int y_current sono le posizioni della mela corrente
-// void Snake::checkForApple()
-// {
-//     coordinate coordMela = app.getCurrentCoordinate();
-//     if (player->head.y == coordMela.posY && player->head.x == coordMela.posX)
-//     {
-//         app.createApple();
-//         score += 10;
-//     }
-// }
-
 void Snake::setDirection(int ch) {
     switch(ch) {
     case KEY_UP:
@@ -133,8 +123,6 @@ void Snake::move(WINDOW *win, int ch)
         push();
         checkWalls();
         spawn();
-        // app.print();
-        // checkForApple();
 
         wrefresh(win);
     }
@@ -181,4 +169,8 @@ void Snake::push()
     }
 
     player = new_head;
+}
+
+pair Snake::getPosition() {
+    return player->head;
 }

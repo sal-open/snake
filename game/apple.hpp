@@ -13,27 +13,20 @@
 #define MIN_Y 2
 #define MAX_Y (HEIGHT_G - 2)
 
-struct coordinate {
-    int posX;
-    int posY;
-};
-
 struct apple {
-    coordinate coord;
+    pair coord;
 };
 
 class Apple {
+private:
+    apple apples;
+    
 public:
     Apple();
-    ~Apple();
 
     void createApple();
-    coordinate getCurrentCoordinate() const;
-    void print() const;
-    void printInConsole() const;
-
-private:
-    apple* apples;
+    pair getPosition() const;
+    void print(WINDOW *win) const;
 };
 
 #endif // APPLE_H

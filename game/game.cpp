@@ -48,6 +48,17 @@ bool Game::checkTime() {
     return (difftime(now, start) >= TIMER);
 }
 
+// int x_current, int y_current sono le posizioni della mela corrente
+void Game::checkForApple()
+{
+    if (avatar.getPosition().x == app.getPosition().x &&
+        avatar.getPosition().y == app.getPosition().y )
+    {
+        app.createApple();
+        punteggio += 10;
+    }
+}
+
 void Game::play() {
     startGame();
     
@@ -56,6 +67,8 @@ void Game::play() {
     while (!gameOver) {
         gameOver = checkTime();
         processInput();
+        app.print(gameWindow);
+        checkForApple();
         updateHeader();
     }
 
