@@ -61,8 +61,10 @@ void Game::checkForApple()
 
 void Game::play() {
     startGame();
-    
+
     avatar.gen();
+
+    app.createApple();
     
     while (!gameOver) {
         gameOver = checkTime();
