@@ -18,9 +18,9 @@ private:
 
     time_t start, now;
 
-    bool gameOver = false;
+    bool gameOver;
 
-    int punteggio = 0;
+    int punteggio;
     
     void startGame();
     void endGame();

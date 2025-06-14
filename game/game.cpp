@@ -6,6 +6,7 @@ Game::Game() {
 void Game::startGame() {
     start = time(nullptr);
     gameOver = false;
+    punteggio = 0;
 
     gameWindow = interface(HEIGHT_G, WIDTH_G);
     wrefresh(gameWindow);
