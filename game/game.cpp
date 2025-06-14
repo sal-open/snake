@@ -4,7 +4,8 @@ Game::Game() {
 }
 
 void Game::startGame() {
-    
+    start = time(nullptr);
+
     gameWindow = interface(HEIGHT_G, WIDTH_G);
     wrefresh(gameWindow);
 }
@@ -25,15 +26,26 @@ void Game::processInput() {
     switch (ch)
     {
     case 'p':   // Pausa
-        while (getch() != 'p') {
-        };
-
-        pauseMenu.run();
+        if (pauseMenu.run() == 10) gameOver = true;
 
         break;
     default:
         avatar.move(gameWindow, ch);
     }
+
+
+}
+
+void Game::updateHeader() {
+    mvwprintw(gameWindow, 0, 2, " Punteggio: %d ", punteggio);
+    waddch(gameWindow, ACS_HLINE);
+    wprintw(gameWindow, " Tempo: %d ", TIMER - (int)difftime(now, start));
+    wrefresh(gameWindow);
+}
+
+bool Game::checkTime() {
+    now = time(nullptr);
+    return (difftime(now, start) >= TIMER);
 }
 
 void Game::play() {
@@ -41,7 +53,11 @@ void Game::play() {
     
     avatar.gen();
     
-    while (!gameOver) gameOver = processInput();
+    while (!gameOver) {
+        gameOver = checkTime();
+        processInput();
+        updateHeader();
+    }
 
     endGame();
 }

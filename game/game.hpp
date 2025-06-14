@@ -4,6 +4,7 @@
 
 #include <iostream> 
 #include <ncurses.h>
+#include <ctime>
 #include "snake.hpp"
 #include "pause.hpp"
 #include "utilities.hpp"
@@ -15,16 +16,21 @@ private:
 
     WINDOW *gameWindow;
 
+    time_t start, now;
+
     bool gameOver = false;
+
+    int punteggio = 0;
     
     void startGame();
     void endGame();
     void processInput();
     bool checkTime();
+    void updateHeader();
 
 public:
     Game();
-    void play();    
+    void play();
 };
 
 #endif // GAME_H
