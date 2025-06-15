@@ -1,6 +1,9 @@
 .vscode
 .idea
 .txt
-relazione/*
+relazione/*.aux
+relazione/*.log
+relazione/*.pdf
+relazione/*.synctex.gz
 .synctex.gz
 output
