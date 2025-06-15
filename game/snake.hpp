@@ -1,12 +1,3 @@
-/*
-* Laurea Triennale in Informatica - Alma Mater Studiorum.
-* 
-* Corso: Programmazione (00819).
-* Studente: Salvatore Bruzzese.
-* 
-* Descrizione: .
-*/
-
 #ifndef SNAKE_H
 #define SNAKE_H
 

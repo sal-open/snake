@@ -1,12 +1,3 @@
-/*
- * Laurea Triennale in Informatica - Alma Mater Studiorum.
- *
- * Corso: Programmazione (00819).
- * Studente: Salvatore Bruzzese, Pietro Tombaccini.
- *
- * Descrizione: .
- */
-
 #include "snake.hpp"
 
 Snake::Snake() {}
