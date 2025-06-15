@@ -15,17 +15,14 @@ private:
     WINDOW *score;
 
     time_t id;
-    char nickname[MAX_NICKNAME_SIZE];
+    char username[NAME_SIZE];
     double points;
-
-    void Save();
-    
-    void mostraPunteggi();
 
 public:
     Data();
-    Data(const char *new_nickname, double new_points);
-    void punteggio();
+    Data(const char *new_username, double new_points);
+    void save();
+    void mostra();
 };
 
 #endif // DATA_H

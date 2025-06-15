@@ -4,19 +4,19 @@
 Data::Data() : id{time(nullptr)}, points{0} {
 }
 
-Data::Data(const char *new_nickname, double new_points) : id{time(0)}, points{new_points}
+Data::Data(const char *new_username, double new_points) : id{time(0)}, points{new_points}
 {
     int x = 0;
-    while (new_nickname[x] != '\0' && x < MAX_NICKNAME_SIZE - 1)
+    while (new_username[x] != '\0' && x < NAME_SIZE - 1)
     {
-        nickname[x] = new_nickname[x];
+        username[x] = new_username[x];
         x++;
     }
-    nickname[x] = '\0';
+    username[x] = '\0';
 }
 
 // Salvataggio punteggi
-void Data::Save()
+void Data::save()
 {
     static bool first_save = true;
     if (first_save)
@@ -39,7 +39,7 @@ void Data::Save()
     if (data_file.tellg() == 0)
     {
         data_file << "ID:" << id << "\n";
-        data_file << "Nickname:" << nickname << "\n";
+        data_file << "username:" << username << "\n";
         data_file << "Punteggio:" << points << "\n";
         data_file.close();
         return;
@@ -58,7 +58,7 @@ void Data::Save()
         return;
     }
     time_t id_parsed;
-    char nickname_parsed[MAX_NICKNAME_SIZE];
+    char username_parsed[NAME_SIZE];
     double points_parsed;
     bool inserted = false;
     char line[MAX_LINE_LENGTH];
@@ -72,14 +72,14 @@ void Data::Save()
         {
             continue;
         }
-        id_parsed = std::strtoll(line + 3, NULL, 10); // Leggo Nickname
+        id_parsed = std::strtoll(line + 3, NULL, 10); // Leggo username
         data_file.getline(line, MAX_LINE_LENGTH);
-        if (line[0] == '\0' || strncmp(line, "Nickname:", 9) != 0)
+        if (line[0] == '\0' || strncmp(line, "username:", 9) != 0)
         {
             continue;
         }
-        strncpy(nickname_parsed, line + 9, MAX_NICKNAME_SIZE - 1);
-        nickname_parsed[MAX_NICKNAME_SIZE - 1] = '\0'; // Leggo Punteggio
+        strncpy(username_parsed, line + 9, NAME_SIZE - 1);
+        username_parsed[NAME_SIZE - 1] = '\0'; // Leggo Punteggio
         data_file.getline(line, MAX_LINE_LENGTH);
         if (line[0] == '\0' || strncmp(line, "Punteggio:", 10) != 0)
         {
@@ -92,14 +92,14 @@ void Data::Save()
         {
             // Inserisco prima il mio record (che ha punteggio più alto)
             temp_file << "ID:" << id << "\n";
-            temp_file << "Nickname:" << nickname << "\n";
+            temp_file << "username:" << username << "\n";
             temp_file << "Punteggio:" << points << "\n";
             inserted = true;
         }
 
         // Copio il record corrente
         temp_file << "ID:" << id_parsed << "\n";
-        temp_file << "Nickname:" << nickname_parsed << "\n";
+        temp_file << "username:" << username_parsed << "\n";
         temp_file << "Punteggio:" << points_parsed << "\n";
     }
 
@@ -107,7 +107,7 @@ void Data::Save()
     if (!inserted)
     {
         temp_file << "ID:" << id << "\n";
-        temp_file << "Nickname:" << nickname << "\n";
+        temp_file << "username:" << username << "\n";
         temp_file << "Punteggio:" << points << "\n";
     }
 
@@ -133,20 +133,17 @@ void Data::Save()
 }
 
 // Stampa su finestra ncurses
-void Data::mostraPunteggi()
+void Data::mostra()
 {
-    initscr();
 
     score = interface(HEIGHT_C, WIDTH_C);
-
-    wrefresh(score);
 
     std::ifstream file("dati.txt");
 
     if (!file.is_open())
     {
         mvwprintw(score, 1, 2, "Errore nell'aprire il file dei punteggi.");
-        mvwprintw(score, HEIGHT_C - 1, 2, "Premere 'e' per tornare al menu");
+        mvwprintw(score, HEIGHT_C - 2, 2, "Premere 'e' per tornare al menu");
         wrefresh(score);
         while (getch() != 'e') {
         }
@@ -156,22 +153,20 @@ void Data::mostraPunteggi()
 
     int row = 2;
     char line[MAX_LINE_LENGTH];
-    char nickname[MAX_NICKNAME_SIZE];
+    char username[NAME_SIZE];
     double points;
 
-    mvwprintw(score, 2, 2, "Nickname");
+    mvwprintw(score, 2, 4, "username");
     
-    wmove(score, 2, getmaxx(score));
+    wmove(score, 2, getmaxx(score) / 2);
 
     waddch(score, ACS_VLINE);
 
-    wmove(score, 2, getmaxx(score) + 1);
-
-    wprintw(score, "Punteggio");
+    wprintw(score, " Punteggio");
 
     // Aggiungi un contatore per limitare il numero di punteggi visualizzati
     int count = 0;
-    const int MAX_SCORES_TO_DISPLAY = 10; // O un numero che si adatti alla finestra
+    const int MAX_SCORES_TO_DISPLAY = 10;
 
     while (file.peek() != EOF && row < getmaxy(score) - 3 && count < MAX_SCORES_TO_DISPLAY)
     {
@@ -179,32 +174,29 @@ void Data::mostraPunteggi()
         file.getline(line, MAX_LINE_LENGTH);
         if (line[0] == '\0' || strncmp(line, "ID:", 3) != 0) continue;
 
-        // Leggi Nickname
+        // Leggi username
         file.getline(line, MAX_LINE_LENGTH);
-        if (line[0] == '\0' || strncmp(line, "Nickname:", 9) != 0) continue;
-        strncpy(nickname, line + 9, MAX_NICKNAME_SIZE - 1);
-        nickname[MAX_NICKNAME_SIZE - 1] = '\0';
+        if (line[0] == '\0' || strncmp(line, "username:", 9) != 0) continue;
+        strncpy(username, line + 9, NAME_SIZE - 1);
+        username[NAME_SIZE - 1] = '\0';
 
         // Leggi Punteggio
         file.getline(line, MAX_LINE_LENGTH);
         if (line[0] == '\0' || strncmp(line, "Punteggio:", 10) != 0) continue;
         points = std::strtod(line + 10, NULL);
 
-        mvwprintw(score, row++, 2, "| %-20s | %10.2f |", nickname, points);
+        mvwprintw(score, row++, 2, "| %-20s | %10.2f |", username, points);
         count++;
     }
 
-    mvwprintw(score, HEIGHT_C - 1, 2, "Premere 'e' per tornare al menu");
+    mvwprintw(score, HEIGHT_C - 3, 4, "Premere 'e' per tornare al menu.");
     wrefresh(score);
 
     while (getch() != 'e') {
     }
 
     wclear(score);
+    wrefresh(score);
     delwin(score);
     file.close();
-}
-
-void Data::punteggio() {
-    
 }

@@ -12,14 +12,17 @@ class Menu {
 private:
     Info info;
     Game game;
-    Data user;    
+    Data classifica;    
 
     WINDOW *menu;
+
+    char *username = new char;
 
     const char *title = "MENU";
     const char* items[MENU] = { "Nuova partita", "Punteggi", "Informazioni", "Esci" };
     const char  triggers[MENU] = { 'n', 'p', 'i', 'e' };
 
+    void askUsername();
     void renderMenu(int selected);
     int interactMenu(WINDOW* win);
 

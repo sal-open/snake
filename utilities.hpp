@@ -13,10 +13,10 @@
 #define WIDTH_P 21
 #define HEIGHT_I 18   // Info
 #define WIDTH_I 40
-#define HEIGHT_C 50   // Classifica
-#define WIDTH_C 25
+#define HEIGHT_C 25   // Classifica
+#define WIDTH_C 50
 
-#define MAX_NICKNAME_SIZE 100
+#define NAME_SIZE 21   // Lunghezza massima nome utente
 #define MAX_LINE_LENGTH 256
 
 #define TIMER 300     // Il tempo per passare il livello base

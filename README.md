@@ -1,5 +1,4 @@
 # Cose da sistemare
-- Inserire nickname prima di avviare il gioco.
 - Fare in modo che, una volta che finisce il gioco o che si perde, questo viene salvato.
 - Migliorie generali all'aspetto della classifica.
 - Bug: se ho visitato un livello prima di finire quello corrente, ritornando a quello

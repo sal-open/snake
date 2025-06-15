@@ -15,6 +15,31 @@ void Menu::init() {
     start_color();
     use_default_colors();
     refresh();
+
+    askUsername();
+}
+
+void Menu::askUsername() {
+    const int popup_h = 6;
+    const int popup_w = NAME_SIZE + 4;
+    const int input_y  = 3;
+    const int input_x  = 2;
+
+    WINDOW *popUp = interface(popup_h, popup_w);
+
+    mvwprintw(popUp, 1, 4, "Inserire username");
+
+    mvwhline(popUp, input_y, input_x, '_', NAME_SIZE);
+    wrefresh(popUp);
+
+    echo();
+    mvwgetnstr(popUp, input_y, input_x, username, NAME_SIZE);
+    noecho();
+
+    // Pulisci e chiudi il popup
+    wclear(popUp);
+    wrefresh(popUp);
+    delwin(popUp);
 }
 
 void Menu::renderMenu(int selected) {
@@ -67,6 +92,7 @@ int Menu::interactMenu(WINDOW* menu) {
 }
 
 void Menu::run() {
+
     menu = interface(HEIGHT_M, WIDTH_M);
     box(menu, 0, 0);
 
@@ -76,7 +102,7 @@ void Menu::run() {
                 game.play(0);
                 break;
             case 1:
-                user.punteggio();
+                classifica.mostra();
                 break;
             case 2:
                 info.showInfo();
