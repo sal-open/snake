@@ -7,24 +7,25 @@
 #include <cstring>
 #include <cstdlib>
 #include <ncurses.h>
+#include "utilities.hpp"
 
 class Data
 {
 private:
-    static const int MAX_NICKNAME_SIZE = 100;
-    static const int MAX_LINE_LENGTH = 256;
+    WINDOW *score;
 
-    // Non lo so
     time_t id;
     char nickname[MAX_NICKNAME_SIZE];
     double points;
 
+    void Save();
+    
+    void mostraPunteggi();
+
 public:
     Data();
     Data(const char *new_nickname, double new_points);
-    void Save();
-    static void Print();
-    static void mostraPunteggiNcurses();
+    void punteggio();
 };
 
 #endif // DATA_H

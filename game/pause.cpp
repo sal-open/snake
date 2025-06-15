@@ -78,8 +78,7 @@ int Pause::interact() {
     case KEY_RIGHT: {
       int nextSelected = (selected + 1) % PAUSE_MENU;
       // Salta i livelli completati
-      while (nextSelected <
-             10) { // Solo per i livelli, non per "Termina partita"
+      while (nextSelected < 10) { // Solo per i livelli, non per "Termina partita"
         bool isCompletato = false;
         for (int i = 0; livelliCompletati[i] != -1; i++) {
           if (livelliCompletati[i] == nextSelected) {
@@ -98,8 +97,7 @@ int Pause::interact() {
     case KEY_LEFT: {
       int prevSelected = (selected - 1 + PAUSE_MENU) % PAUSE_MENU;
       // Salta i livelli completati
-      while (prevSelected <
-             10) { // Solo per i livelli, non per "Termina partita"
+      while (prevSelected < 10) { // Solo per i livelli, non per "Termina partita"
         bool isCompletato = false;
         for (int i = 0; livelliCompletati[i] != -1; i++) {
           if (livelliCompletati[i] == prevSelected) {
@@ -165,9 +163,5 @@ int Pause::interact() {
 int Pause::run() {
   menu = interface(HEIGHT_P, WIDTH_P);
 
-  int selected = 0;
-
-  selected = interact();
-
-  return selected;
+  return interact();
 }

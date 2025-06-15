@@ -6,12 +6,13 @@
 #include "game/game.hpp"
 #include "info.hpp"
 #include "utilities.hpp"
+#include "score/data.hpp"
 
 class Menu {
 private:
     Info info;
     Game game;
-    
+    Data user;    
 
     WINDOW *menu;
 

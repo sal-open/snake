@@ -1,7 +1,8 @@
 #include "data.hpp"
 
 // Costruttori
-Data::Data() : id{time(0)}, points{0} {}
+Data::Data() : id{time(nullptr)}, points{0} {
+}
 
 Data::Data(const char *new_nickname, double new_points) : id{time(0)}, points{new_points}
 {
@@ -131,52 +132,25 @@ void Data::Save()
     dst.close();
 }
 
-// Stampa su std::cout (non usare con ncurses)
-void Data::Print()
-{
-    std::ifstream file("dati.txt");
-
-    if (!file.is_open())
-    {
-        std::cerr << "Errore nell'aprire il file." << std::endl;
-        return;
-    }
-
-    char line[MAX_LINE_LENGTH];
-    while (file.peek() != EOF)
-    {
-        // Stampa ogni riga del file
-        file.getline(line, MAX_LINE_LENGTH);
-        std::cout << line << std::endl;
-    }
-    file.close();
-
-    std::cout << "Dati stampati correttamente." << std::endl;
-}
-
 // Stampa su finestra ncurses
-void Data::mostraPunteggiNcurses()
+void Data::mostraPunteggi()
 {
+    initscr();
 
-    const int win_height = 25;
-    const int win_width = 50;
-    int starty = (LINES - win_height) / 2;
-    int startx = (COLS - win_width) / 2;
+    score = interface(HEIGHT_C, WIDTH_C);
 
-    WINDOW* score_win = newwin(win_height, win_width, starty, startx);
-    keypad(score_win, true); // Abilita keypad per questa finestra
-
-    // Disegna il bordo e il contenuto della finestra dei punteggi
-    box(score_win, 0, 0);
-    // Non c'è bisogno di refresh() globale qui, solo wrefresh(score_win)
+    wrefresh(score);
 
     std::ifstream file("dati.txt");
+
     if (!file.is_open())
     {
-        mvwprintw(score_win, 1, 2, "Errore nell'aprire il file dei punteggi.");
-        wrefresh(score_win);
-        wgetch(score_win); // Attendi un input prima di chiudere
-        delwin(score_win); // Cancella la finestra dei punteggi
+        mvwprintw(score, 1, 2, "Errore nell'aprire il file dei punteggi.");
+        mvwprintw(score, HEIGHT_C - 1, 2, "Premere 'e' per tornare al menu");
+        wrefresh(score);
+        while (getch() != 'e') {
+        }
+        delwin(score);
         return;
     }
 
@@ -185,15 +159,21 @@ void Data::mostraPunteggiNcurses()
     char nickname[MAX_NICKNAME_SIZE];
     double points;
 
-    mvwprintw(score_win, row++, 2, "+----------------------+------------+");
-    mvwprintw(score_win, row++, 2, "|        Nickname      | Punteggio  |");
-    mvwprintw(score_win, row++, 2, "+----------------------+------------+");
+    mvwprintw(score, 2, 2, "Nickname");
+    
+    wmove(score, 2, getmaxx(score));
+
+    waddch(score, ACS_VLINE);
+
+    wmove(score, 2, getmaxx(score) + 1);
+
+    wprintw(score, "Punteggio");
 
     // Aggiungi un contatore per limitare il numero di punteggi visualizzati
     int count = 0;
     const int MAX_SCORES_TO_DISPLAY = 10; // O un numero che si adatti alla finestra
 
-    while (file.peek() != EOF && row < getmaxy(score_win) - 3 && count < MAX_SCORES_TO_DISPLAY)
+    while (file.peek() != EOF && row < getmaxy(score) - 3 && count < MAX_SCORES_TO_DISPLAY)
     {
         // Leggi ID
         file.getline(line, MAX_LINE_LENGTH);
@@ -210,15 +190,21 @@ void Data::mostraPunteggiNcurses()
         if (line[0] == '\0' || strncmp(line, "Punteggio:", 10) != 0) continue;
         points = std::strtod(line + 10, NULL);
 
-        mvwprintw(score_win, row++, 2, "| %-20s | %10.2f |", nickname, points);
+        mvwprintw(score, row++, 2, "| %-20s | %10.2f |", nickname, points);
         count++;
     }
 
-    mvwprintw(score_win, row++, 2, "+----------------------+------------+");
-    mvwprintw(score_win, row++, 2, "Premi un tasto per tornare al menu...");
-    wrefresh(score_win); // Aggiorna la finestra dei punteggi
+    mvwprintw(score, HEIGHT_C - 1, 2, "Premere 'e' per tornare al menu");
+    wrefresh(score);
 
-    wgetch(score_win); // Attendi un input nella finestra dei punteggi
-    delwin(score_win); // Elimina la finestra dei punteggi quando hai finito
+    while (getch() != 'e') {
+    }
+
+    wclear(score);
+    delwin(score);
     file.close();
+}
+
+void Data::punteggio() {
+    
 }
