@@ -1,8 +1,42 @@
-\documentclass{article}
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
 \usepackage{listings}
-\title{Progetto di Programmazione - Sn@ke}
-\author{Pietro Tombaccini (0001172381) - Salvatore Bruzzese - Andrei Cosmin Pirva}
+\usepackage{graphicx}
+\usepackage{color}
 \begin{document}
-\maketitle
+
+\begin{titlepage}
+    \centering
+    {\Huge Relazione progetto Sn@ke\par}
+    \vspace{1cm}
+    {\large Corso di Programmazione\par}
+    \vspace{1cm}
+    {\large Pietro Tombaccini, 0001172381\par}
+    {\large Salvatore Bruzzese, 0001161573\par}
+    {\large Andrei Pirva Cosmin, Matricola\par}
+    \vfill
+    {\large Anno Accademico 2024/2025\par}
+\end{titlepage}
+
+\tableofcontents
+\chapter{Introduzione e analisi del problema}
+\section{Introduzione}
+\section{Analisi del problema}
+\section{Divisione compiti}
+
+\chapter{Progettazione}
+\section{Architettura generale del progetto}
+\section{La classe Snake}
+\begin{lstlisting}[language=C++, caption={Metodo move della classe Snake}]
+void Snake::move(WINDOW *win, int ch, int mult) {
+    // ...
+}
+\end{lstlisting}
+\section{La classe Game}
+\chapter{Implementazione}
+\chapter{Test e risultati}
+\chapter{Conclusioni}
+\appendix
+\chapter{Manuale d'uso}
 
 \end{document}
