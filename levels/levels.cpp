@@ -21,12 +21,14 @@ Levels::~Levels() {
 livelli Levels::generaLivello(int bonus, double molt, double vel, int id) {
   livelli newLevel = new Livello();
   newLevel->idLivello = id;
+  newLevel->numeroMeleMangiate = 0;
   newLevel->bonus = bonus;
   newLevel->moltiplicatore = molt;
   newLevel->velocitaSerpente = vel;
   newLevel->numeroMeleDaMangiare =
       (newLevel->bonus / 10) * newLevel->moltiplicatore;
   newLevel->tempoADisposizione = newLevel->bonus / newLevel->moltiplicatore;
+  newLevel->tempoRimanente = newLevel->bonus / newLevel->moltiplicatore;
   newLevel->prev = nullptr;
   newLevel->next = nullptr;
   return newLevel;
@@ -112,7 +114,7 @@ int *Levels::getLivelliCompletati() {
       index++;
     }
   }
-  
+
   livelliCompletati[count] = -1;
 
   return livelliCompletati;

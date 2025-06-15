@@ -150,6 +150,9 @@ int Pause::interact() {
       }
       // Se non è completato o è "Termina partita", procedi
       if (!isCompletato || selected == 10) {
+        wclear(menu);
+        wrefresh(menu);
+        delwin(menu);
         delete[] livelliCompletati;
         return selected;
       }

@@ -2,12 +2,11 @@
 
 Game::Game() {}
 
-void Game::startGame(bool resetScore) {
+void Game::startGame() {
   start = time(nullptr);
   gameOver = false;
-  if (resetScore) {
-    punteggio = 0; // Reset del punteggio solo se richiesto
-  }
+  punteggio = 0;
+
   meleMangiate = 0; // Reset del contatore mele
 
   gameWindow = interface(HEIGHT_G, WIDTH_G);
@@ -36,7 +35,16 @@ void Game::processInput() {
       // Torna alla partita senza fare nulla
       return;
     } else {
-      play(level, false);
+      // Salvo il tempo rimanente del livello corrente prima di cambiare
+      this->levels.getCurrentLevel()->tempoRimanente =
+          levels.getCurrentLevel()->tempoADisposizione -
+          (int)difftime(time(nullptr), start);
+
+      this->levels.gotoLevel(level);
+      // Imposto il tempo di inizio in base al tempo rimanente del nuovo livello
+      start = time(nullptr) - (levels.getCurrentLevel()->tempoADisposizione -
+                               levels.getCurrentLevel()->tempoRimanente);
+      meleMangiate = this->levels.getCurrentLevel()->numeroMeleMangiate;
     }
     break;
   }
@@ -48,9 +56,7 @@ void Game::processInput() {
 void Game::updateHeader() {
   mvwprintw(gameWindow, 0, 2, " Punteggio: %d ", punteggio);
   waddch(gameWindow, ACS_HLINE);
-  wprintw(gameWindow, " Tempo: %d ",
-          levels.getCurrentLevel()->tempoADisposizione -
-              (int)difftime(now, start));
+  wprintw(gameWindow, " Tempo: %d ", levels.getCurrentLevel()->tempoRimanente);
   waddch(gameWindow, ACS_HLINE);
   wprintw(
       gameWindow, " Mele: %d/%d ",
@@ -61,7 +67,7 @@ void Game::updateHeader() {
   // Aggiungo il numero del livello in verde
   init_pair(3, COLOR_GREEN, -1); // Definisco una nuova coppia di colori
   wattron(gameWindow, COLOR_PAIR(3));
-  wprintw(gameWindow, " Livello: %d ", levels.getCurrentIndex());
+  wprintw(gameWindow, " Livello: %d ", levels.getCurrentIndex() + 1);
   wattroff(gameWindow, COLOR_PAIR(3));
 
   wrefresh(gameWindow);
@@ -69,6 +75,8 @@ void Game::updateHeader() {
 
 bool Game::checkTime() {
   now = time(nullptr);
+  this->levels.getCurrentLevel()->tempoRimanente =
+      levels.getCurrentLevel()->tempoADisposizione - (int)difftime(now, start);
   return (difftime(now, start) >= levels.getCurrentLevel()->tempoADisposizione);
 }
 
@@ -79,27 +87,24 @@ void Game::checkForApple() {
     app.createApple();
     punteggio += 10 * levels.getCurrentLevel()->moltiplicatore;
     meleMangiate++;
+    this->levels.getCurrentLevel()->numeroMeleMangiate = meleMangiate;
 
     // Controlla se abbiamo mangiato tutte le mele del livello
     if (meleMangiate >= levels.getCurrentLevel()->numeroMeleDaMangiare) {
-      // Completa il livello corrente
       levels.completaLivello(levels.getCurrentIndex());
-      // Passa al livello successivo
       levels.nextLevel();
-      // Resetta il contatore delle mele per il nuovo livello
-      meleMangiate = 0;
-      // Aggiorna il timer
+      meleMangiate = levels.getCurrentLevel()->numeroMeleMangiate;
       start = time(nullptr);
     }
   }
 }
 
-void Game::play(int level, bool resetScore) {
-  startGame(resetScore); // Passo il parametro a startGame
+void Game::play(int level) {
+  startGame(); // Passo il parametro a startGame
 
   avatar.gen();
   levels.gotoLevel(level);
-  
+
   // Reset del timer e delle mele quando si cambia livello
   start = time(nullptr);
   meleMangiate = 0;
