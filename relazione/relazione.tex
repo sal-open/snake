@@ -3,6 +3,7 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage{forest}
 \begin{document}
 
 \begin{titlepage}
@@ -26,6 +27,26 @@
 
 \chapter{Progettazione}
 \section{Architettura generale del progetto}
+\begin{forest}
+	for tree={
+		edge={->},
+		align=center
+	}
+	[Menu
+		[Gioco
+			[Serpente]
+			[Mela]
+			[Pausa]
+			[Livello
+				[Velocità]
+				[Tempo]
+			]
+		]
+		[Classifica]
+		[Informazioni]
+		[Esci]
+	]
+\end{forest}
 \section{La classe Snake}
 \begin{lstlisting}[language=C++, caption={Metodo move della classe Snake}]
 void Snake::move(WINDOW *win, int ch, int mult) {
