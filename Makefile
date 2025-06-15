@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -fdiagnostics-color=always -g -I.
 LDFLAGS = -lncurses
-SOURCES = game/*.cpp home/*.cpp score/*.cpp utilities.cpp main.cpp
+SOURCES = game/*.cpp home/*.cpp score/*.cpp utilities.cpp main.cpp levels/*.cpp
 OUTPUT = ./output
 
 all:

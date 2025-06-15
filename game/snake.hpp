@@ -47,7 +47,7 @@ public:
     void checkWalls();
     void spawn();
     void setDirection(int ch);
-    void move(WINDOW * win, int ch);
+    void move(WINDOW * win, int ch, int mult);
     pair getPosition();
     void pop();
     void push();

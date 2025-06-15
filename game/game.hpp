@@ -16,6 +16,7 @@ private:
     Snake avatar{};
     Apple app{};
     Pause pauseMenu{};
+    Levels levels = Levels(10);
 
     WINDOW *gameWindow;
 
@@ -24,8 +25,9 @@ private:
     bool gameOver;
 
     int punteggio;
+    int meleMangiate;  // Contatore delle mele mangiate nel livello corrente
     
-    void startGame();
+    void startGame(bool resetScore = true);
     void endGame();
     void processInput();
     bool checkTime();
@@ -34,7 +36,7 @@ private:
 
 public:
     Game();
-    void play();
+    void play(int level, bool resetScore = true);
 };
 
 #endif // GAME_H

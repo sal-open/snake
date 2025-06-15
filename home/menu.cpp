@@ -78,7 +78,7 @@ void Menu::run() {
   while (true) {
     switch (interactMenu(menu)) {
     case 0: {
-      game.play();
+      game.play(0);
 
       break;
     }

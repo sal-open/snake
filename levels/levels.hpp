@@ -1,6 +1,8 @@
 #ifndef LEVELS_H
 #define LEVELS_H
 
+#include <iostream>
+
 struct Livello
 {
     int idLivello;
@@ -14,16 +16,19 @@ struct Livello
     Livello *next;
 };
 
+typedef Livello *livelli;
+
 class Levels
 {
 private:
-    Livello head;
-    Livello tail;
-    Livello current;
+    livelli head;
+    livelli tail;
+    livelli current;
 
 public:
     Levels(int numLivelli = 10);
-    Livello generaLivello(int bonus, double molt, double vel, int id);
+    ~Levels();
+    livelli generaLivello(int bonus, double molt, double vel, int id);
     void generaLivelli(int numeroLivelli);
     void stampaLivelli();
     int getCurrentIndex();
@@ -31,7 +36,8 @@ public:
     void previusLevel();
     void gotoLevel(int num = 1);
     void completaLivello(int index);
-    Livello getCurrentLevel();
+    Livello* getCurrentLevel();
+    int* getLivelliCompletati();
 };
 
 #endif // LEVELS_H

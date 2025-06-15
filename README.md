@@ -18,9 +18,7 @@ Questa repository contiene il codice sorgente di _Snake_, un progetto sviluppato
 
 
 
-## TODO list
-- Salvatore: implementazione tempo di gioco, con termine in caso finisca il tempo, velocità del serpente
-- Pietro: implementare i livelli all'interno della classe o Snake o Game (meglio Game)
-- Andrei: per favore riguarda la classe data
-
-COSE CHE RESTANO: menu di pausa con possibilità di cambio dei livelli e uscire dal gioco
+## Cose che restano
+- inserire il nickname prima di iniziare e una volta che finisce il gioco, o che perde, questo viene salvato
+- migliorie generali all'aspetto
+- crediti

@@ -11,6 +11,7 @@ class Menu {
 private:
     Info info;
     Game game;
+    
 
     WINDOW *menu;
 
